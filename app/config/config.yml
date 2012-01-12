@@ -4,7 +4,7 @@ imports:
 
 framework:
     #esi:             ~
-    #translator:      { fallback: %locale% }
+    translator:      { fallback: %locale% }
     secret:          %secret%
     charset:         UTF-8
     router:          { resource: "%kernel.root_dir%/config/routing.yml" }
@@ -58,3 +58,18 @@ swiftmailer:
 jms_security_extra:
     secure_controllers:  true
     secure_all_services: false
+
+
+fos_user:
+    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    firewall_name: main
+    user_class: smpcl\UserBundle\Entity\User
+    from_email:
+        address: notificaciones@simplevende.com.ar
+        sender_name: SimpleVende
+    registration:
+        confirmation:
+            from_email:
+                address: registro@simplevende.com
+                sender_name: Registro SimpleVende
+            enabled: true

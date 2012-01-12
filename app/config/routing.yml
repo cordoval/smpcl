@@ -1,3 +1,15 @@
+smpclClassifieldBundle:
+    resource: "@smpclClassifieldBundle/Resources/config/routing.yml"
+    prefix:   /avisos
+
+smpclUserBundle:
+    resource: "@smpclUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
+smpclThemeBundle:
+    resource: "@smpclThemeBundle/Resources/config/routing.yml"
+    prefix:   /
+    
 # Internal routing configuration to handle ESI
 #_internal:
 #   resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
