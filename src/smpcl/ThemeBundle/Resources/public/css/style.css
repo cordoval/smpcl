@@ -2472,3 +2472,7 @@ END BOOTSTRAP
 .cThis {
     clear: both;
 }
+
+.xlarge.rememberMeInput {
+    width: 245px !important; 
+}

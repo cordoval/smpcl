@@ -11,19 +11,14 @@
 
 <div class="loginHeader">
     <h3>Iniciar Sesión</h3>
+        <blockquote class="prettyprint">
+        <p>
+            <strong>¿No tienes una cuenta?</strong> Registrate haciendo <a href="{{ path('fos_user_registration_register') }}" class="">Click Aquí</a>, es simple y rápido !
+        </p>
+    </blockquote>
 </div>
 
-
-
-
-
 <div class="loginForm">
-    
-              <blockquote class="prettyprint">
-
-                <p><strong>¿ No tenes una cuenta ?</strong> Registrate haciendo <a href="{{ path('fos_user_registration_register') }}" class="">Click Aquí</a>, es simple y rápido !</p>
-            </blockquote>
-    
     <form action="{{ path('fos_user_security_check') }}" method="post">
 
         <fieldset>
@@ -40,13 +35,13 @@
                 <label for="password">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
                 <div class="input">
                     <div class="input-append ">
-                        <input class="xlarge" type="password" id="password" name="_password" />
+                        <input class="xlarge rememberMeInput" type="password" id="password" name="_password" />
 
                         <label class="add-on active timpsyRememberMe"><input type="checkbox" name="_remember_me" id="remember_me" value="on" checked="checked" /></label>
                     </div>
                 </div>
             </div>
-  
+
             <div class="actions">
                 <input type="submit" class="btn primary" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" />
             </div>
@@ -61,6 +56,7 @@
 <script type="text/javascript">
     jQuery(document).ready(function($) {
         $('.timpsyRememberMe').twipsy({fallback: 'Recordar Contraseña', placement: 'right'});
+        $('#username').focus();
     });
 </script>
 
