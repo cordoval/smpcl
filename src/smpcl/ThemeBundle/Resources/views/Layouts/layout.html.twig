@@ -1,9 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title> {% block title %}{% endblock %} - {{ theme_project_name }}</title>
+        <title> {% block title %}Simple Classifield{% endblock %} - {{ theme_project_name }}</title>
         <meta name="description" content="">
         <meta name="author" content="">
 
@@ -31,24 +30,7 @@
 
     <body>
 
-        <div class="topbar">
-            <div class="topbar-inner">
-                <div class="container-fluid">
-                    <a class="brand" href="#">{{ theme_project_name }}</a>
-                    <ul class="nav">
-                        <li class="active"><a href="{{ path('smpclThemeBundle_homepage') }}">Inicio</a></li>
-                        <li><a href="{{ path('smpclThemeBundle_static', {name: 'ayuda' }) }}">Acerca</a></li>
-                        <li><a href="#contact">Noticias</a></li>
-                    </ul>
-                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                        <p class="pull-right"><a href="{{ path('fos_user_security_logout') }}">&middot;[x] </a></p>
-                        <p class="pull-right">Ingreso como <a href="#">{{ app.user.username }}</a></p>
-                    {% else %}
-                        <p class="pull-right"><a href="{{ path('fos_user_security_login') }}">Ingresar</a></p>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
+        {% include 'smpclThemeBundle:Layouts:navbar.html.twig' %}
 
         <div class="container-fluid">
             <div class="sidebar">
@@ -81,8 +63,12 @@
                 {% block content %}
                 SOME CONTENT
                 {% endblock %}
+
+                <footer>
+                    <p>&copy; Company 2011</p>
+                </footer>
+            </div>
         </div>
-             </div>
 
     </body>
 </html>

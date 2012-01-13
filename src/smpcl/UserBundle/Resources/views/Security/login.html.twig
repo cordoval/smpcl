@@ -2,42 +2,66 @@
 
 {% block fos_user_content %}
 {% if error %}
-<div>{{ error }}</div>
+<div class="alert-message error fade in" data-alert="alert">
+    <a class="close" href="#">×</a>
+    <p>{{ error }}</p>
+</div>
 {% endif %}
 
-<form action="{{ path('fos_user_security_check') }}" method="post">
 
-    <fieldset>
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
-        <legend>Ingresar</legend>
-        <div class="clearfix">
-            <label for="username">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label>
-            <div class="input">
-                <input type="text" class="xlarge" id="username" name="_username" value="{{ last_username }}" />
+<div class="loginHeader">
+    <h3>Iniciar Sesión</h3>
+</div>
+
+
+
+
+
+<div class="loginForm">
+    
+              <blockquote class="prettyprint">
+
+                <p><strong>¿ No tenes una cuenta ?</strong> Registrate haciendo <a href="{{ path('fos_user_registration_register') }}" class="">Click Aquí</a>, es simple y rápido !</p>
+            </blockquote>
+    
+    <form action="{{ path('fos_user_security_check') }}" method="post">
+
+        <fieldset>
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+
+            <div class="clearfix">
+                <label for="username">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label>
+                <div class="input">
+                    <input type="text" class="xlarge" id="username" name="_username" value="{{ last_username }}" />
+                </div>
+            </div><!-- /clearfix -->
+
+            <div class="clearfix">
+                <label for="password">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
+                <div class="input">
+                    <div class="input-append ">
+                        <input class="xlarge" type="password" id="password" name="_password" />
+
+                        <label class="add-on active timpsyRememberMe"><input type="checkbox" name="_remember_me" id="remember_me" value="on" checked="checked" /></label>
+                    </div>
+                </div>
             </div>
-        </div><!-- /clearfix -->
-
-
-        <div class="clearfix">
-            <label for="password">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
-            <div class="input">
-                <input class="xlarge" type="password" id="password" name="_password" />
+  
+            <div class="actions">
+                <input type="submit" class="btn primary" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" />
             </div>
-        </div><!-- /clearfix -->
-
-        <div class="clearfix">
-            <label for="remember_me">{{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}</label>
-            <div class="input">
-                <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-            </div>
-        </div><!-- /clearfix -->
-
-        <div class="actions">
-            <input type="submit" class="btn primary" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" />
-            <a href="/register" class="btn success">Registrarse</a>
-        </div>
-    </fieldset>
+        </fieldset>
 
 
-</form>
+    </form>
+
+</div>
+
+
+<script type="text/javascript">
+    jQuery(document).ready(function($) {
+        $('.timpsyRememberMe').twipsy({fallback: 'Recordar Contraseña', placement: 'right'});
+    });
+</script>
+
 {% endblock fos_user_content %}
