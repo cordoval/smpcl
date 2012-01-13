@@ -27,6 +27,6 @@ class ClassifieldType extends AbstractType
 
     public function getName()
     {
-        return 'smpcl_classifieldbundle_classifieldtype';
+        return 'classifield';
     }
 }
