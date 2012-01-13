@@ -3,28 +3,28 @@ aviso:
     defaults: { _controller: "smpclClassifieldBundle:Classifield:index" }
 
 aviso_show:
-    pattern:  /{id}/show
+    pattern:  /{id}/ver
     defaults: { _controller: "smpclClassifieldBundle:Classifield:show" }
 
 aviso_new:
-    pattern:  /new
+    pattern:  /nuevo
     defaults: { _controller: "smpclClassifieldBundle:Classifield:new" }
 
 aviso_create:
-    pattern:  /create
+    pattern:  /crear
     defaults: { _controller: "smpclClassifieldBundle:Classifield:create" }
     requirements: { _method: post }
 
 aviso_edit:
-    pattern:  /{id}/edit
+    pattern:  /{id}/editar
     defaults: { _controller: "smpclClassifieldBundle:Classifield:edit" }
 
 aviso_update:
-    pattern:  /{id}/update
+    pattern:  /{id}/actualizar
     defaults: { _controller: "smpclClassifieldBundle:Classifield:update" }
     requirements: { _method: post }
 
 aviso_delete:
-    pattern:  /{id}/delete
+    pattern:  /{id}/borrar
     defaults: { _controller: "smpclClassifieldBundle:Classifield:delete" }
     requirements: { _method: post }

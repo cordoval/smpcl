@@ -15,9 +15,9 @@ class Classifield {
     const CURRENCY_DOLAR = 'dolar';
     const CURRENCY_PESOS_AR = 'pesos_AR';
 
-    const STATUS_DISABLED = 'disabled';
-    const STATUS_PENDING = 'pending';
-    const STATUS_ENABLED = 'enabled';
+    const STATUS_DISABLED = 'disabled'; // deleted entities
+    const STATUS_PENDING = 'pending'; // pending classifields
+    const STATUS_ENABLED = 'enabled'; // public classifields
 
 
 
@@ -44,17 +44,26 @@ class Classifield {
      */
     private $description;
 
+    
+     /**
+     * @var boolean $is_billable
+     *
+     * @ORM\Column(name="is_billable", type="boolean")
+     */
+    private $is_billable;
+    
+    
     /**
      * @var integer $currency
      *
-     *  @ORM\Column(type="string")
+     *  @ORM\Column(type="string", length=255)
      */
     private $currency;
 
     /**
      * @var string $price
      *
-     * @ORM\Column(name="price", type="string", length=255)
+     * @ORM\Column(name="price", type="integer")
      */
     private $price;
 
@@ -81,7 +90,7 @@ class Classifield {
     /**
      * @var datetime $published_at
      *
-     * @ORM\Column(name="published_at", type="datetime")
+     * @ORM\Column(name="published_at", type="datetime", nullable=true)
      */
     private $published_at;
 
@@ -96,7 +105,9 @@ class Classifield {
      *
      * @var string picture
      * 
-     * @ORM\Column(name="picture_src", type="string", length=255)
+     * @TODO: Create upload action
+     * 
+     * @ORM\Column(name="picture_src", type="string", length=255, nullable=true)
      * @Assert\File(maxSize="6000000")
      */
     private $picture;
@@ -109,13 +120,27 @@ class Classifield {
     private $user;
     
 
+    /**
+     * CUSTOM METHODS
+     */
     public function __construct() {
-        $this->status = self::STATUS_DISABLED;
-        $this->created_at = time();
+        
+        $this->status = self::STATUS_PENDING;
+        
+        $this->is_billable = FALSE;
+        $this->currency = self::CURRENCY_PESOS_AR;
+        $this->price = 0;
     }
 
    
 
+    public function __toString() {
+        return $this->title;
+    }
+   
+    /**
+     * END CUSTOM METHODS
+     */
 
     /**
      * Get id
@@ -168,6 +193,26 @@ class Classifield {
     }
 
     /**
+     * Set is_billable
+     *
+     * @param boolean $isBillable
+     */
+    public function setIsBillable($isBillable)
+    {
+        $this->is_billable = $isBillable;
+    }
+
+    /**
+     * Get is_billable
+     *
+     * @return boolean 
+     */
+    public function getIsBillable()
+    {
+        return $this->is_billable;
+    }
+
+    /**
      * Set currency
      *
      * @param string $currency
@@ -190,7 +235,7 @@ class Classifield {
     /**
      * Set price
      *
-     * @param string $price
+     * @param integer $price
      */
     public function setPrice($price)
     {
@@ -200,7 +245,7 @@ class Classifield {
     /**
      * Get price
      *
-     * @return string 
+     * @return integer 
      */
     public function getPrice()
     {
@@ -288,6 +333,26 @@ class Classifield {
     }
 
     /**
+     * Set picture
+     *
+     * @param string $picture
+     */
+    public function setPicture($picture)
+    {
+        $this->picture = $picture;
+    }
+
+    /**
+     * Get picture
+     *
+     * @return string 
+     */
+    public function getPicture()
+    {
+        return $this->picture;
+    }
+
+    /**
      * Set category
      *
      * @param smpcl\ClassifieldBundle\Entity\Category $category
@@ -325,25 +390,5 @@ class Classifield {
     public function getUser()
     {
         return $this->user;
-    }
-
-    /**
-     * Set picture
-     *
-     * @param text $picture
-     */
-    public function setPicture($picture)
-    {
-        $this->picture = $picture;
-    }
-
-    /**
-     * Get picture
-     *
-     * @return text 
-     */
-    public function getPicture()
-    {
-        return $this->picture;
     }
 }
