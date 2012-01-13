@@ -1,7 +1,9 @@
 smpclClassifieldBundle:
     resource: "@smpclClassifieldBundle/Resources/config/routing.yml"
     prefix:   /avisos
-
+smpclClassifieldBundle:
+    resource: "@smpclClassifieldBundle/Resources/config/routing/classifield.yml"
+    prefix:   /aviso
 smpclUserBundle:
     resource: "@smpclUserBundle/Resources/config/routing.yml"
     prefix:   /
