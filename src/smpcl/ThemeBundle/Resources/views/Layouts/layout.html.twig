@@ -40,10 +40,11 @@
                         <li><a href="{{ path('smpclThemeBundle_static', {name: 'ayuda' }) }}">Acerca</a></li>
                         <li><a href="#contact">Noticias</a></li>
                     </ul>
-                    {% if is_granted('ROLE_USER') %}
+                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                        <p class="pull-right"><a href="{{ path('fos_user_security_logout') }}">&middot;[x] </a></p>
                         <p class="pull-right">Ingreso como <a href="#">{{ app.user.username }}</a></p>
                     {% else %}
-                        <p class="pull-right"><a href="/login">Ingresar</a></p>
+                        <p class="pull-right"><a href="{{ path('fos_user_security_login') }}">Ingresar</a></p>
                     {% endif %}
                 </div>
             </div>

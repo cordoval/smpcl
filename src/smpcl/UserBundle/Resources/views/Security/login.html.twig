@@ -1,0 +1,43 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block fos_user_content %}
+{% if error %}
+<div>{{ error }}</div>
+{% endif %}
+
+<form action="{{ path('fos_user_security_check') }}" method="post">
+
+    <fieldset>
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+        <legend>Ingresar</legend>
+        <div class="clearfix">
+            <label for="username">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label>
+            <div class="input">
+                <input type="text" class="xlarge" id="username" name="_username" value="{{ last_username }}" />
+            </div>
+        </div><!-- /clearfix -->
+
+
+        <div class="clearfix">
+            <label for="password">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
+            <div class="input">
+                <input class="xlarge" type="password" id="password" name="_password" />
+            </div>
+        </div><!-- /clearfix -->
+
+        <div class="clearfix">
+            <label for="remember_me">{{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}</label>
+            <div class="input">
+                <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+            </div>
+        </div><!-- /clearfix -->
+
+        <div class="actions">
+            <input type="submit" class="btn primary" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" />
+            <a href="/register" class="btn success">Registrarse</a>
+        </div>
+    </fieldset>
+
+
+</form>
+{% endblock fos_user_content %}
