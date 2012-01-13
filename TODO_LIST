@@ -1,0 +1,6 @@
+- Crear los layouts necesarios para el ThemeBundle
+- Generar los CSS y JS, para el layout y colocarlo como assets.
+- Generar una tabla de rutas por defecto, asi lo implementamos en el modelo y queda un mejor analisis del sistema.
+- Migrar los layouts de los avisos ( ClassifieldBundle ) al theme.
+
+Esto es todo por ahora, con las siguientes tareas, me divierto por un poco menos de una semana, luego debo seguir analizando el sistema
