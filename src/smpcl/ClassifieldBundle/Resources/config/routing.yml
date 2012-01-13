@@ -1,0 +1,3 @@
+smpclClassifieldBundle_homepage:
+    pattern:  /
+    defaults: { _controller: smpclClassifieldBundle:Default:index }

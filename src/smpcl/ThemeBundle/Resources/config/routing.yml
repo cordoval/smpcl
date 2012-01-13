@@ -1,0 +1,8 @@
+smpclThemeBundle_homepage:
+    pattern:  /
+    defaults: { _controller: smpclThemeBundle:Default:index }
+
+
+smpclThemeBundle_static:
+    pattern:  /sitio/{name}/
+    defaults: { _controller: smpclThemeBundle:Default:static }

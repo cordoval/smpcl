@@ -1,0 +1,7 @@
+parameters:
+#    smpcl_user.example.class: smpcl\UserBundle\Example
+
+services:
+#    smpcl_user.example:
+#        class: %smpcl_user.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

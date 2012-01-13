@@ -1,0 +1,22 @@
+<h1>Classifield edit</h1>
+
+<form action="{{ path('aviso_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+    {{ form_widget(edit_form) }}
+    <p>
+        <button type="submit">Edit</button>
+    </p>
+</form>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('aviso') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('aviso_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+</ul>
