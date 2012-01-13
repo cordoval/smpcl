@@ -20,6 +20,9 @@ framework:
 twig:
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
+    globals:
+        theme_layout_html: "smpclThemeBundle:Layouts:layout.html.twig"
+        theme_project_name: SMPCL
 
 # Assetic Configuration
 assetic:
