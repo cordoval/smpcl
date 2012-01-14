@@ -1,0 +1,82 @@
+{% form_theme form theme %}
+
+
+<div class="loginHeader">
+    <h3>Registrate</h3>
+        <blockquote class="prettyprint">
+        <p>
+            <strong>¿Ya tienes una cuenta?</strong> Inicia sesión haciendo <a href="{{ path('fos_user_security_login') }}" class="">Click Aquí</a> y disfruta publicando !
+        </p>
+    </blockquote>
+</div>  
+
+{% set password_error = form_errors(form.plainPassword) %}
+{% set register_error = form_errors(form)%}
+
+{% if register_error %}
+    {% set register_error = '<h4> Errores en el Registro </h4>' ~ register_error %}
+{% endif %}
+
+{% if password_error %}
+    {% set password_error = '<h4> Errores en la constraseña </h4>' ~ password_error %}
+{% endif %}
+
+{% set errors = register_error ~  password_error %}
+
+{% if errors %}
+    {% autoescape false %}
+    <div class="alert-message block-message warning fade in" data-alert="alert">
+    <a class="close" href="#">×</a>
+    <p>{{ errors }}</p>
+</div>
+    {% endautoescape %}
+{%endif%}
+
+<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+      {# 
+      we want a custom and sexy form for registration, so we disable this
+      form_widget(form) 
+      #}
+      <fieldset>
+
+        <div class="clearfix">
+            {{ form_label(form.username) }}
+            <div class="input">
+                {{ form_widget(form.username) }}
+            </div>
+        </div>
+
+        <div class="clearfix">
+            {{ form_label(form.email) }}
+            <div class="input">
+                {{ form_widget(form.email) }}
+            </div>
+        </div>
+
+
+        <div class="clearfix">
+            {{ form_label(form.plainPassword.first) }}
+            <div class="input">
+                {{ form_widget(form.plainPassword.first) }}
+            </div>
+        </div>  
+        <div class="clearfix">
+            {{ form_label(form.plainPassword.second) }}
+            <div class="input">
+                {{ form_widget(form.plainPassword.second) }}
+            </div>
+        </div> 
+
+        <div class="actions">
+            {{ form_widget(form._token) }}
+            <input type="submit" class="btn primary" id="_submit" name="_submit" value="{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}" />
+        </div>
+
+    </fieldset>
+</form>
+
+<script type="text/javascript">
+    jQuery(document).ready(function($) {
+        $('#fos_user_registration_form_username').focus();
+    });
+</script>

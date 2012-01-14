@@ -41,6 +41,14 @@ class Category {
      * @ORM\Column(name="tags", type="string", length=255)
      */
     private $tags;
+    
+    
+    /**
+     * @var string $subtype
+     *
+     * @ORM\Column(name="subtype", type="string", length=255)
+     */
+    private $subtype;
 
     /**
      * @var array $classifields

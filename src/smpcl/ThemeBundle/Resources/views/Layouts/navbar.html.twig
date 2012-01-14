@@ -13,8 +13,8 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle">{{ app.user.username }}</a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Mis Avisos</a></li>
-                        <li><a href="#">Perfil</a></li>
+                        <li><a href="{{ path('aviso') }}">Mis Avisos</a></li>
+                        <li><a href="{{ path('fos_user_profile_show') }}">Perfil</a></li>
                         
                         <li class="divider"></li>
                         

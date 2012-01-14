@@ -41,6 +41,14 @@ class Category {
      * @ORM\Column(name="tags", type="string", length=255)
      */
     private $tags;
+    
+    
+    /**
+     * @var string $subtype
+     *
+     * @ORM\Column(name="subtype", type="string", length=255)
+     */
+    private $subtype;
 
     /**
      * @var array $classifields
@@ -125,5 +133,25 @@ class Category {
     public function getTags()
     {
         return $this->tags;
+    }
+
+    /**
+     * Set subtype
+     *
+     * @param string $subtype
+     */
+    public function setSubtype($subtype)
+    {
+        $this->subtype = $subtype;
+    }
+
+    /**
+     * Get subtype
+     *
+     * @return string 
+     */
+    public function getSubtype()
+    {
+        return $this->subtype;
     }
 }

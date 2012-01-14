@@ -2476,3 +2476,10 @@ END BOOTSTRAP
 .xlarge.rememberMeInput {
     width: 245px !important; 
 }
+
+.block-message.fos_user_success {
+    margin: 10px 0;
+   font-weight: bold;
+   font-size: 18px;
+    
+}
