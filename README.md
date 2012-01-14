@@ -15,6 +15,8 @@ Author: Bortoli German aka Germanaz0
 Screenshots
 ===
 
+REGISTER: http://dl.dropbox.com/u/835150/smpcl_register.png
+
 LOGIN: http://dl.dropbox.com/u/835150/smpcl_login.png
 
-REGISTER: http://dl.dropbox.com/u/835150/smpcl_register.png
+LOGGED IN: http://dl.dropbox.com/u/835150/smpcl_logged_in.png ( todo a lot of work in this section )
