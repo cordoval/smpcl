@@ -87,3 +87,10 @@ stof_doctrine_extensions:
         default:
 #            tree: false
             timestampable: true
+            
+            
+services:
+    twig.extension.text:
+        class: Twig_Extensions_Extension_Text
+        tags:
+            - { name: twig.extension }

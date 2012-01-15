@@ -21,7 +21,11 @@ class ClassifieldController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
 
+        $user = $this->get('security.context')->getToken()->getUser();
+        
         $entities = $em->getRepository('smpclClassifieldBundle:Classifield')->findAll();
+        $entities = $em->getRepository('smpclClassifieldBundle:Classifield')
+                -> findBy(array('user' => $user->getId()), array('created_at' => 'DESC'));;
 
         return $this->render('smpclClassifieldBundle:Classifield:index.html.twig', array(
             'entities' => $entities

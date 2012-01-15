@@ -2486,3 +2486,8 @@ END BOOTSTRAP
 #theme_main_content {
     min-height: 400px;
 }
+
+.well.listingAvisosTopActions {
+    text-align: right;
+    
+}
