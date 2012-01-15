@@ -16,6 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Classifield {
     const CURRENCY_DOLAR = 'dolar';
     const CURRENCY_PESOS_AR = 'pesos_AR';
+    const CURRENCY_EURO = 'euro';
 
     const STATUS_DISABLED = 'disabled'; // deleted entities
     const STATUS_PENDING = 'pending'; // pending classifields
@@ -134,13 +135,43 @@ class Classifield {
         $this->status = self::STATUS_PENDING;
         
         $this->is_billable = TRUE;
+       
         $this->currency = self::CURRENCY_PESOS_AR;
         $this->price = 0;
+        
         
         
     }
 
    
+    public static function getCurrencyOptions() {
+        $currency_options = array(
+              self::CURRENCY_PESOS_AR => 'Pesos Argentinos',
+              self::CURRENCY_DOLAR => 'Dolar',
+              self::CURRENCY_EURO => 'Euro',
+          );
+        
+        return $currency_options;
+    }
+    
+    public static function getCurrencySymbols($value = NULL) {
+         $currency_symbols = array(
+              self::CURRENCY_PESOS_AR => '$',
+              self::CURRENCY_DOLAR => 'U$$',
+              self::CURRENCY_EURO => '€',
+          );
+         
+         if ($value) {
+             if (isset($currency_symbols[$value])) {
+                 return $currency_symbols[$value];
+             } else {
+                 return self::CURRENCY_PESOS_AR;
+             }
+         }
+         
+         return $currency_symbols;
+    }
+    
 
     public function __toString() {
         return $this->title;

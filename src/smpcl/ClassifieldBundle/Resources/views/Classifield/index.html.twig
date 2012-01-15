@@ -9,8 +9,7 @@
              <th>Picture</th>
             <th>Title</th>
             <th>Description</th>
-            
-            <th>Currency</th>
+
             <th>Price</th>
             <th>Status</th>
            
@@ -24,8 +23,14 @@
             <td><a href="{{ path('aviso_show', { 'id': entity.id }) }}">{{ entity.title }}</a></td>
             <td>{{ entity.description }}</td>
             
-            <td>{{ entity.currency }}</td>
-            <td>{{ entity.price }}</td>
+            <td>
+                {% if entity.getIsBillable %}
+                    {{ entity.getCurrencySymbols(entity.currency)  }} {{ entity.price }}
+                {% else %}
+                    No Aplica
+                {% endif %}
+            </td>
+            
             <td>{{ entity.status }}</td>
             
            
