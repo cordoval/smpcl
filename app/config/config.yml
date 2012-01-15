@@ -50,6 +50,8 @@ doctrine:
     orm:
         auto_generate_proxy_classes: %kernel.debug%
         auto_mapping: true
+        mappings:
+            StofDoctrineExtensionsBundle: false
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -76,3 +78,12 @@ fos_user:
                 address: registro@simplevende.com
                 sender_name: Registro SimpleVende
             enabled: true
+            
+            
+            
+stof_doctrine_extensions:
+    default_locale: es_ES
+    orm:
+        default:
+#            tree: false
+            timestampable: true

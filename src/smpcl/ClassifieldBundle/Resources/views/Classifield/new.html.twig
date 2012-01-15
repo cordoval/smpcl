@@ -1,16 +1,20 @@
-<h1>Classifield creation</h1>
+{% extends theme_layout_html %}
+{% form_theme form 'smpclClassifieldBundle:Form:fields.html.twig' %}
+
+{% block content %}
+
+<h1>Crear Aviso</h1>
 
 <form action="{{ path('aviso_create') }}" method="post" {{ form_enctype(form) }}>
+     <fieldset>
     {{ form_widget(form) }}
-    <p>
-        <button type="submit">Create</button>
-    </p>
+    </fieldset>
+      
+      <div class="actions">
+            <input type="submit" class="btn primary" value="Guardar">
+            <a href="{{ path('aviso') }}" class="btn">Volver</a>
+      </div>
+   
 </form>
-
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('aviso') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+   
+{% endblock %}

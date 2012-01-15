@@ -1,0 +1,29 @@
+{# src/Acme/TaskBundle/Resources/views/Form/fields.html.twig #}
+
+{% block field_row %}
+{% spaceless %}
+
+{% set form_error = form_errors(form) %}
+
+
+{% set custom_class = '' %}
+
+{% if form_error %}
+{% set custom_class = 'error' %}
+{% endif %}
+
+<div class="clearfix {{custom_class}}">
+    {{ form_label(form) }}
+    <div class="input">
+        {{ form_widget(form, { 'attr': {'class': 'custom_input' ~ custom_class } }) }}
+        {% if form_error %}
+        {% autoescape false %}
+        <span class="help-block">{{ form_error }}</span>
+        {% endautoescape %}
+        {% endif %}
+    </div>
+    
+</div><!-- /clearfix -->
+
+{% endspaceless %}
+{% endblock field_row %}

@@ -2480,6 +2480,9 @@ END BOOTSTRAP
 .block-message.fos_user_success {
     margin: 10px 0;
    font-weight: bold;
-   font-size: 18px;
-    
+   font-size: 18px;   
+}
+
+#theme_main_content {
+    min-height: 400px;
 }

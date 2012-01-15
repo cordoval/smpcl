@@ -1,22 +1,31 @@
-<h1>Classifield edit</h1>
+{% extends theme_layout_html %}
+{% form_theme edit_form 'smpclClassifieldBundle:Form:fields.html.twig' %}
+
+{% block content %}
+
+<h1>Editar aviso <small>{{ entity.title }}</small></h1>
 
 <form action="{{ path('aviso_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
     {{ form_widget(edit_form) }}
-    <p>
-        <button type="submit">Edit</button>
-    </p>
+   
+    <div class="actions">
+        <input type="submit" class="btn success" value="Guardar">
+        <a href="{{ path('aviso') }}" class="btn">Volver</a>
+        <a href="javascript:void(0)" onclick="javascript:delete_classifield(this)" class="btn danger">Eliminar</a>
+    </div>
 </form>
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('aviso') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('aviso_delete', { 'id': entity.id }) }}" method="post">
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-</ul>
+
+<form action="{{ path('aviso_delete', { 'id': entity.id }) }}" method="post" id="delete_classifield_form">
+     {{ form_widget(delete_form) }}
+</form>
+
+<script type="text/javascript">
+    function delete_classifield() {
+        var reply = confirm("¿ Estás seguro que deseas borrar el aviso ?");
+        if (reply) {
+            $('#delete_classifield_form').submit();
+        }
+    }
+</script>
+{% endblock %}

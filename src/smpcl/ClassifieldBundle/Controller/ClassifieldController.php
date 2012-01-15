@@ -59,7 +59,7 @@ class ClassifieldController extends Controller
     {
         $entity = new Classifield();
         $form   = $this->createForm(new ClassifieldType(), $entity);
-
+        
         return $this->render('smpclClassifieldBundle:Classifield:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView()
@@ -79,6 +79,13 @@ class ClassifieldController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
+            
+            $user = $this->get('security.context')->getToken()->getUser();
+           
+            if ($user) {
+                $entity->setUser($user);
+            }
+            
             $em->persist($entity);
             $em->flush();
 

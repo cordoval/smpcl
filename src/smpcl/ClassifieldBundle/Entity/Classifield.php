@@ -1,9 +1,11 @@
 <?php
 
 namespace smpcl\ClassifieldBundle\Entity;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * smpcl\ClassifieldBundle\Entity\Classifield
@@ -48,7 +50,7 @@ class Classifield {
      /**
      * @var boolean $is_billable
      *
-     * @ORM\Column(name="is_billable", type="boolean")
+     * @ORM\Column(name="is_billable", type="boolean", nullable=true)
      */
     private $is_billable;
     
@@ -76,14 +78,18 @@ class Classifield {
     /**
      * @var datetime $created_at
      *
-     * @ORM\Column(name="created_at", type="datetime")
+     * @ORM\Column(name="created_at", type="datetime", nullable=true)
+     * 
+     * @Gedmo\Timestampable(on="create")
      */
     private $created_at;
 
     /**
      * @var datetime $updated_at
      *
-     * @ORM\Column(name="updated_at", type="datetime")
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     * 
+     *  @Gedmo\Timestampable(on="update")
      */
     private $updated_at;
 
@@ -127,9 +133,11 @@ class Classifield {
         
         $this->status = self::STATUS_PENDING;
         
-        $this->is_billable = FALSE;
+        $this->is_billable = TRUE;
         $this->currency = self::CURRENCY_PESOS_AR;
         $this->price = 0;
+        
+        
     }
 
    

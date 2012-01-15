@@ -19,9 +19,10 @@ class AppKernel extends Kernel
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
             
             new FOS\UserBundle\FOSUserBundle(),
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            
             new smpcl\UserBundle\smpclUserBundle(),
             new smpcl\ClassifieldBundle\smpclClassifieldBundle(),
-            
             new smpcl\ThemeBundle\smpclThemeBundle(),
             
         );
