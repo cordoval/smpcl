@@ -11,6 +11,7 @@ Massachusetts Institute of Technology (MIT) License. See LICENSE file
 in the root of the package you downloaded.
 
 Author: Bortoli German aka Germanaz0
+
 Contributor: Peyregne Mariano aka Marian0
 
 Screenshots

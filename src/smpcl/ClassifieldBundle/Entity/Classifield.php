@@ -160,7 +160,7 @@ class Classifield {
     public static function getCurrencySymbols($value = NULL) {
          $currency_symbols = array(
               self::CURRENCY_PESOS_AR => '$',
-              self::CURRENCY_DOLAR => 'U$$',
+              self::CURRENCY_DOLAR => 'U$D',
               self::CURRENCY_EURO => '€',
           );
          

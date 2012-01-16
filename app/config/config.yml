@@ -22,6 +22,7 @@ twig:
     strict_variables: %kernel.debug%
     globals:
         theme_layout_html: "smpclThemeBundle:Layouts:layout.html.twig"
+        theme_flashes_html: "smpclThemeBundle:Layouts:flashes_messages.html.twig"
         theme_project_name: SMPCL
 
 # Assetic Configuration

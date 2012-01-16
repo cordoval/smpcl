@@ -1,75 +1,35 @@
 {% extends theme_layout_html %}
 
 {% block content %}
-
-<h1>Classifield</h1>
-
-<table class="record_properties">
-    <tbody>
-        <tr>
-            <th>Id</th>
-            <td>{{ entity.id }}</td>
-        </tr>
-        <tr>
-            <th>Title</th>
-            <td>{{ entity.title }}</td>
-        </tr>
-        <tr>
-            <th>Description</th>
-            <td>{{ entity.description }}</td>
-        </tr>
-        <tr>
-            <th>Is_billable</th>
-            <td>{{ entity.isbillable }}</td>
-        </tr>
-        <tr>
-            <th>Currency</th>
-            <td>{{ entity.getCurrencySymbols(entity.currency)  }}</td>
-        </tr>
-        <tr>
-            <th>Price</th>
-            <td>{{ entity.price }}</td>
-        </tr>
-        <tr>
-            <th>Status</th>
-            <td>{{ entity.status }}</td>
-        </tr>
-        <tr>
-            <th>Created_at</th>
-            <td>{{ entity.createdat|date('Y-m-d H:i:s') }}</td>
-        </tr>
-        <tr>
-            <th>Updated_at</th>
-            <td>{{ entity.updatedat|date('Y-m-d H:i:s') }}</td>
-        </tr>
-        <tr>
-            <th>Published_at</th>
-            <td>{{ entity.publishedat|date('Y-m-d H:i:s') }}</td>
-        </tr>
-        <tr>
-            <th>Picture</th>
-            <td>{{ entity.picture }}</td>
-        </tr>
-    </tbody>
-</table>
-
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('aviso') }}">
-            Back to the list
+<div class="row">
+<div class="span13">
+{% include theme_flashes_html %}
+<h1>{{ entity.title }} <small> &middot;  {{ entity.category }}</small></h1>
+</div>
+    </div>
+<div class="row">
+    <div class="span9 classifieldDescription">
+        <p>{{ entity.description | nl2br }}</p>
+    </div>
+    <div class="span4 classifieldInfo">
+        <a href="#">
+            <img class="thumbnail" src="http://placehold.it/210x150" alt="">
         </a>
-    </li>
-    <li>
-        <a href="{{ path('aviso_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('aviso_delete', { 'id': entity.id }) }}" method="post">
+        <h4>PRECIO: {{ entity.FormattedPrice }}</h4>
+        <ul>
+            <li>Mod: {{ entity.updatedat|date('d/m/Y H:i') }}</li>
+            <li>Publicó: {{ entity.user }}</li>
+
+        </ul>
+    </div>
+    <div class="span13 well">
+        <a href="{{ path('aviso_edit', { 'id': entity.id }) }}" class="btn primary">Editar</a>
+        <a href="{{ path('aviso') }}" class="btn">Mis Avisos</a>
+        <form action="{{ path('aviso_delete', { 'id': entity.id }) }}" method="post" class="showActionDelete">
             {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
+            <button type="submit" class="btn danger" onclick="return confirm('¿ Estás seguro que deseas borrar el aviso ?')">Borrar</button>
         </form>
-    </li>
-</ul>
+    </div>
+</div>
 
 {% endblock %}

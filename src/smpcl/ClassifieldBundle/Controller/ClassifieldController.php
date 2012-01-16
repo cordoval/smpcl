@@ -20,10 +20,9 @@ class ClassifieldController extends Controller {
 
         $user = $this->get('security.context')->getToken()->getUser();
 
-        $entities = $em->getRepository('smpclClassifieldBundle:Classifield')->findAll();
+//        $entities = $em->getRepository('smpclClassifieldBundle:Classifield')->findAll();
         $entities = $em->getRepository('smpclClassifieldBundle:Classifield')
                 ->findBy(array('user' => $user->getId()), array('created_at' => 'DESC'));
-        ;
 
         return $this->render('smpclClassifieldBundle:Classifield:index.html.twig', array(
                     'entities' => $entities
@@ -86,6 +85,7 @@ class ClassifieldController extends Controller {
 
             $em->persist($entity);
             $em->flush();
+            $this->setFlash('success', 'Su aviso se ha cargado con éxito.');
 
             return $this->redirect($this->generateUrl('aviso_show', array('id' => $entity->getId())));
         }
@@ -157,8 +157,9 @@ class ClassifieldController extends Controller {
             
             $em->persist($entity);
             $em->flush();
-
-            return $this->redirect($this->generateUrl('aviso_edit', array('id' => $id)));
+            $this->setFlash('success', 'Los cambios se han aplicado con éxito.');
+            
+            return $this->redirect($this->generateUrl('aviso_show', array('id' => $id)));
         }
 
         return $this->render('smpclClassifieldBundle:Classifield:edit.html.twig', array(
@@ -221,4 +222,9 @@ class ClassifieldController extends Controller {
         return FALSE;
     }
 
+    
+     protected function setFlash($action, $value)
+    {
+        $this->container->get('session')->setFlash($action, $value);
+    }
 }

@@ -2491,3 +2491,13 @@ END BOOTSTRAP
     text-align: right;
     
 }
+
+
+
+.classifieldDescription { 
+    text-align: justify 
+}
+
+.showActionDelete, .showActionDelete #form {
+    display: inline;
+}
