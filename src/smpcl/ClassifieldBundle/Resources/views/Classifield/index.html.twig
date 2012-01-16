@@ -30,7 +30,7 @@
              </td>
             <td>
                 <a href="{{ path('aviso_show', { 'id': entity.id }) }}">{{ entity.title }}</a>
-                <blockquote>{{ entity.description | truncate(60) }}</blockquote>
+                <blockquote>{{ entity.description | striptags |truncate(100) }}</blockquote>
             </td>
             
             

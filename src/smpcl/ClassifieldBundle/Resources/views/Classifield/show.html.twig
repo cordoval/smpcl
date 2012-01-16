@@ -9,7 +9,9 @@
     </div>
 <div class="row">
     <div class="span9 classifieldDescription">
-        <p>{{ entity.description | nl2br }}</p>
+        {% autoescape false %}
+        <p>{{ entity.description | raw }}</p>
+        {% endautoescape %}
     </div>
     <div class="span4 classifieldInfo">
         <a href="#">

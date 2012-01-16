@@ -22,7 +22,7 @@ class ClassifieldType extends AbstractType
             
             ->add('title', null, array('label' => 'Título'))
             ->add('category', null, array('label' => 'Categoría'))
-            ->add('description', null, array('label' => 'Descripción'))
+            ->add('description', null, array('label' => 'Descripción', 'attr' => array('class'=>'tinymce', 'tinymce'=>'{"theme":"simple"}', 'rows' => 10)))
             ->add('picture', null, array('label' => 'Foto'))
             ->add('is_billable', null, array('label' => '¿Tiene un Precio?'))
             ->add('currency', 'choice', array('label' => 'Tipo de Moneda', 'choices' => $this->currency_choices))

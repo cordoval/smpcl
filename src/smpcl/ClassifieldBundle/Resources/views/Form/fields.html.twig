@@ -15,7 +15,7 @@
 <div class="clearfix {{custom_class}}">
     {{ form_label(form) }}
     <div class="input">
-        {{ form_widget(form, { 'attr': {'class': 'custom_input' ~ custom_class } }) }}
+        {{ form_widget(form) }}
         {% if form_error %}
         {% autoescape false %}
         <span class="help-block">{{ form_error }}</span>

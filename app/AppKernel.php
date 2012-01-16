@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             
             new FOS\UserBundle\FOSUserBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
             
             new smpcl\UserBundle\smpclUserBundle(),
             new smpcl\ClassifieldBundle\smpclClassifieldBundle(),

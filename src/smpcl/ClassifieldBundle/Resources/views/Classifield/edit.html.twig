@@ -20,6 +20,8 @@
      {{ form_widget(delete_form) }}
 </form>
 
+{{ tinymce_init() }}
+
 <script type="text/javascript">
     function delete_classifield() {
         var reply = confirm("¿ Estás seguro que deseas borrar el aviso ?");

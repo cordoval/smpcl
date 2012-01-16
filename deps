@@ -75,3 +75,7 @@
 [DoctrineExtensionsBundle]
     git=http://github.com/stof/StofDoctrineExtensionsBundle.git
     target=/bundles/Stof/DoctrineExtensionsBundle
+
+[TinymceBundle]
+    git=git://github.com/stfalcon/TinymceBundle.git
+    target=/bundles/Stfalcon/Bundle/TinymceBundle
