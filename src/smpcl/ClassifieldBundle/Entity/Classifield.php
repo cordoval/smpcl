@@ -20,6 +20,7 @@ class Classifield {
 
     const STATUS_DISABLED = 'disabled'; // deleted entities
     const STATUS_PENDING = 'pending'; // pending classifields
+    const STATUS_EDITED = 'edited'; // pending classifields
     const STATUS_ENABLED = 'enabled'; // public classifields
 
 
@@ -139,6 +140,8 @@ class Classifield {
         $this->currency = self::CURRENCY_PESOS_AR;
         $this->price = 0;
         
+        $this->published_at = NULL;
+        
         
         
     }
@@ -172,11 +175,40 @@ class Classifield {
          return $currency_symbols;
     }
     
+    
+    public function getFormattedPrice() {
+        $output_text = 'No Aplica';
+
+        if ($this->getIsBillable()) {
+            $currency_symbol = $this->getCurrencySymbols($this->getCurrency());
+            $price = $this->getPrice();
+
+            if (!empty($price)) {
+                $price = number_format($price);
+                $output_text = "{$currency_symbol} {$price}";
+            }
+        }
+
+        return $output_text;
+    }
 
     public function __toString() {
         return $this->title;
     }
    
+    /**
+     * return if some user can edit this entity
+     * @param smpcl\UserBundle\Entity\User $user 
+     */
+    public function canEdit($user) {
+        $owner = $this->getUser();
+     
+        if ($owner->equals($user)) {
+            return TRUE;
+        }
+        
+        return FALSE;
+    }
     /**
      * END CUSTOM METHODS
      */

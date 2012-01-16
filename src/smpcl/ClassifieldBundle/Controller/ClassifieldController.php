@@ -3,7 +3,6 @@
 namespace smpcl\ClassifieldBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
 use smpcl\ClassifieldBundle\Entity\Classifield;
 use smpcl\ClassifieldBundle\Form\ClassifieldType;
 
@@ -11,33 +10,31 @@ use smpcl\ClassifieldBundle\Form\ClassifieldType;
  * Classifield controller.
  *
  */
-class ClassifieldController extends Controller
-{
+class ClassifieldController extends Controller {
+
     /**
      * Lists all Classifield entities.
-     *
      */
-    public function indexAction()
-    {
+    public function indexAction() {
         $em = $this->getDoctrine()->getEntityManager();
 
         $user = $this->get('security.context')->getToken()->getUser();
-        
+
         $entities = $em->getRepository('smpclClassifieldBundle:Classifield')->findAll();
         $entities = $em->getRepository('smpclClassifieldBundle:Classifield')
-                -> findBy(array('user' => $user->getId()), array('created_at' => 'DESC'));;
+                ->findBy(array('user' => $user->getId()), array('created_at' => 'DESC'));
+        ;
 
         return $this->render('smpclClassifieldBundle:Classifield:index.html.twig', array(
-            'entities' => $entities
-        ));
+                    'entities' => $entities
+                ));
     }
 
     /**
      * Finds and displays a Classifield entity.
      *
      */
-    public function showAction($id)
-    {
+    public function showAction($id) {
         $em = $this->getDoctrine()->getEntityManager();
 
         $entity = $em->getRepository('smpclClassifieldBundle:Classifield')->find($id);
@@ -49,90 +46,89 @@ class ClassifieldController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('smpclClassifieldBundle:Classifield:show.html.twig', array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
-
-        ));
+                    'entity' => $entity,
+                    'delete_form' => $deleteForm->createView(),
+                ));
     }
 
     /**
      * Displays a form to create a new Classifield entity.
      *
      */
-    public function newAction()
-    {
+    public function newAction() {
         $entity = new Classifield();
-        $form   = $this->createForm(new ClassifieldType(), $entity);
-        
+        $form = $this->createForm(new ClassifieldType(), $entity);
+
         return $this->render('smpclClassifieldBundle:Classifield:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView()
-        ));
+                    'entity' => $entity,
+                    'form' => $form->createView()
+                ));
     }
 
     /**
      * Creates a new Classifield entity.
      *
      */
-    public function createAction()
-    {
-        $entity  = new Classifield();
+    public function createAction() {
+        $entity = new Classifield();
         $request = $this->getRequest();
-        $form    = $this->createForm(new ClassifieldType(), $entity);
+        $form = $this->createForm(new ClassifieldType(), $entity);
         $form->bindRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
-            
+
             $user = $this->get('security.context')->getToken()->getUser();
-           
+
             if ($user) {
                 $entity->setUser($user);
             }
-            
+
             $em->persist($entity);
             $em->flush();
 
             return $this->redirect($this->generateUrl('aviso_show', array('id' => $entity->getId())));
-            
         }
 
         return $this->render('smpclClassifieldBundle:Classifield:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView()
-        ));
+                    'entity' => $entity,
+                    'form' => $form->createView()
+                ));
     }
 
     /**
      * Displays a form to edit an existing Classifield entity.
      *
      */
-    public function editAction($id)
-    {
+    public function editAction($id) {
         $em = $this->getDoctrine()->getEntityManager();
 
         $entity = $em->getRepository('smpclClassifieldBundle:Classifield')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Classifield entity.');
+        }
+
+        $unvalid = $this->validateCanEdit($entity);
+        if ($unvalid) {
+            return $unvalid;
         }
 
         $editForm = $this->createForm(new ClassifieldType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('smpclClassifieldBundle:Classifield:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
+                    'entity' => $entity,
+                    'edit_form' => $editForm->createView(),
+                    'delete_form' => $deleteForm->createView(),
+                ));
     }
 
     /**
      * Edits an existing Classifield entity.
      *
      */
-    public function updateAction($id)
-    {
+    public function updateAction($id) {
         $em = $this->getDoctrine()->getEntityManager();
 
         $entity = $em->getRepository('smpclClassifieldBundle:Classifield')->find($id);
@@ -141,7 +137,12 @@ class ClassifieldController extends Controller
             throw $this->createNotFoundException('Unable to find Classifield entity.');
         }
 
-        $editForm   = $this->createForm(new ClassifieldType(), $entity);
+        $unvalid = $this->validateCanEdit($entity);
+        if ($unvalid) {
+            return $unvalid;
+        }
+
+        $editForm = $this->createForm(new ClassifieldType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
         $request = $this->getRequest();
@@ -149,6 +150,11 @@ class ClassifieldController extends Controller
         $editForm->bindRequest($request);
 
         if ($editForm->isValid()) {
+            
+            if ($entity->getPublishedAt()) {
+                $entity->setStatus(Classifield::STATUS_EDITED);
+            }
+            
             $em->persist($entity);
             $em->flush();
 
@@ -156,18 +162,17 @@ class ClassifieldController extends Controller
         }
 
         return $this->render('smpclClassifieldBundle:Classifield:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
+                    'entity' => $entity,
+                    'edit_form' => $editForm->createView(),
+                    'delete_form' => $deleteForm->createView(),
+                ));
     }
 
     /**
      * Deletes a Classifield entity.
      *
      */
-    public function deleteAction($id)
-    {
+    public function deleteAction($id) {
         $form = $this->createDeleteForm($id);
         $request = $this->getRequest();
 
@@ -181,6 +186,11 @@ class ClassifieldController extends Controller
                 throw $this->createNotFoundException('Unable to find Classifield entity.');
             }
 
+            $unvalid = $this->validateCanEdit($entity);
+            if ($unvalid) {
+                return $unvalid;
+            }
+
             $em->remove($entity);
             $em->flush();
         }
@@ -188,11 +198,27 @@ class ClassifieldController extends Controller
         return $this->redirect($this->generateUrl('aviso'));
     }
 
-    private function createDeleteForm($id)
-    {
+    private function createDeleteForm($id) {
         return $this->createFormBuilder(array('id' => $id))
-            ->add('id', 'hidden')
-            ->getForm()
+                        ->add('id', 'hidden')
+                        ->getForm()
         ;
     }
+
+    /**
+     * Return a redirect object if the user cannot edit the entity
+     * 
+     * @param user $entity
+     * @return FALSE Or \Symfony\Component\HttpFoundation\RedirectResponse 
+     */
+    private function validateCanEdit($entity) {
+        $user = $this->get('security.context')->getToken()->getUser();
+       //@TODO: CHECK IF THE USER IS AN ADMIN TOO
+        if (!$entity->canEdit($user)) {
+            return $this->redirect($this->generateUrl('aviso'));
+        }
+
+        return FALSE;
+    }
+
 }

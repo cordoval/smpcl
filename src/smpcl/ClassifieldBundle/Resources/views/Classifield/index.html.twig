@@ -30,16 +30,12 @@
              </td>
             <td>
                 <a href="{{ path('aviso_show', { 'id': entity.id }) }}">{{ entity.title }}</a>
-                <blockquote>{{ entity.description | truncate(100) }}</blockquote>
+                <blockquote>{{ entity.description | truncate(60) }}</blockquote>
             </td>
             
             
             <td>
-                {% if entity.isBillable %}
-                    {{ entity.getCurrencySymbols(entity.currency)  }} {{ entity.price }}
-                {% else %}
-                    No Aplica
-                {% endif %}
+                {{ entity.FormattedPrice }}
             </td>
             
             <td>{{ entity.status }}</td>
