@@ -65,14 +65,14 @@ class Classifield {
     private $currency;
 
     /**
-     * @var string $price
+     * @var float $price
      *
-     * @ORM\Column(name="price", type="integer")
+     * @ORM\Column(name="price", type="float")
      */
     private $price;
 
     /**
-     * @var integer $status
+     * @var string $status
      *  @ORM\Column(type="string")
      */
     private $status;
@@ -184,7 +184,7 @@ class Classifield {
             $price = $this->getPrice();
 
             if (!empty($price)) {
-                $price = number_format($price);
+                $price = number_format($price, 2);
                 $output_text = "{$currency_symbol} {$price}";
             }
         }

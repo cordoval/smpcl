@@ -20,13 +20,13 @@ class ClassifieldType extends AbstractType
         $builder
             
             
-            ->add('title', null, array('label' => 'Título'))
-            ->add('category', null, array('label' => 'Categoría'))
-            ->add('description', null, array('label' => 'Descripción', 'attr' => array('class'=>'tinymce', 'tinymce'=>'{"theme":"simple"}', 'rows' => 10)))
-            ->add('picture', null, array('label' => 'Foto'))
-            ->add('is_billable', null, array('label' => '¿Tiene un Precio?'))
+            ->add('title', NULL, array('label' => 'Título'))
+            ->add('category', NULL, array('label' => 'Categoría'))
+            ->add('description', NULL, array('label' => 'Descripción', 'attr' => array('class'=>'tinymce', 'tinymce'=>'{"theme":"simple"}', 'rows' => 10)))
+            ->add('picture', NULL, array('label' => 'Foto'))
+            ->add('is_billable', NULL, array('label' => '¿Tiene un Precio?'))
             ->add('currency', 'choice', array('label' => 'Tipo de Moneda', 'choices' => $this->currency_choices))
-            ->add('price', null, array('label' => 'Precio'))
+            ->add('price', 'number', array('label' => 'Precio'))
 //            ->add('status')
 //            ->add('created_at')
 //            ->add('updated_at')

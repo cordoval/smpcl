@@ -2501,3 +2501,11 @@ END BOOTSTRAP
 .showActionDelete, .showActionDelete #form {
     display: inline;
 }
+
+.listingRowDescription {
+    width: 305px;
+}
+
+.list-icon.media-grid {
+    width: 100px;
+}
