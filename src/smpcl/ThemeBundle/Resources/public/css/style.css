@@ -2495,9 +2495,12 @@ END BOOTSTRAP
 
 
 .classifieldDescription { 
-    text-align: justify 
+    text-align: justify;
 }
 
+.classifieldDescription img {
+    max-width: 500px;
+}
 .showActionDelete, .showActionDelete #form {
     display: inline;
 }
