@@ -2,6 +2,12 @@ imports:
     - { resource: parameters.ini }
     - { resource: security.yml }
 
+#Parametros de la aplicacion
+# Dentro del controlador se obtiene con $this->container->getParameter()
+parameters:
+  nombre: "Simple Classifieds"
+
+
 framework:
     #esi:             ~
     translator:      { fallback: %locale% }
