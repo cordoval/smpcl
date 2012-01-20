@@ -19,6 +19,12 @@ $loader->registerNamespaces(array(
     'Stof'             => __DIR__.'/../vendor/bundles',
     'Gedmo'            => __DIR__.'/../vendor/gedmo-doctrine-extensions/lib',
     'Stfalcon'         => __DIR__.'/../vendor/bundles',
+    
+    //SONATA
+    'Sonata'     => __DIR__.'/../vendor/bundles',
+    'Knp\Bundle' => __DIR__.'/../vendor/bundles',
+    'Knp\Menu'   => __DIR__.'/../vendor/knp/menu/src',
+     'SimpleThings'      => __DIR__.'/../vendor/bundles',
 ));
 $loader->registerPrefixes(array(
     'Twig_Extensions_' => __DIR__.'/../vendor/twig-extensions/lib',

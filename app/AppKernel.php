@@ -3,10 +3,9 @@
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
 
-class AppKernel extends Kernel
-{
-    public function registerBundles()
-    {
+class AppKernel extends Kernel {
+
+    public function registerBundles() {
         $bundles = array(
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new Symfony\Bundle\SecurityBundle\SecurityBundle(),
@@ -17,15 +16,18 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
-            
             new FOS\UserBundle\FOSUserBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
-            
             new smpcl\UserBundle\smpclUserBundle(),
             new smpcl\ClassifieldBundle\smpclClassifieldBundle(),
             new smpcl\ThemeBundle\smpclThemeBundle(),
-            
+            //SONATA
+            new Sonata\jQueryBundle\SonatajQueryBundle(),
+            new Sonata\AdminBundle\SonataAdminBundle(),
+            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
+            new SimpleThings\EntityAudit\SimpleThingsEntityAuditBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
@@ -38,8 +40,8 @@ class AppKernel extends Kernel
         return $bundles;
     }
 
-    public function registerContainerConfiguration(LoaderInterface $loader)
-    {
-        $loader->load(__DIR__.'/config/config_'.$this->getEnvironment().'.yml');
+    public function registerContainerConfiguration(LoaderInterface $loader) {
+        $loader->load(__DIR__ . '/config/config_' . $this->getEnvironment() . '.yml');
     }
+
 }

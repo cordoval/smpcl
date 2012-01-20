@@ -100,10 +100,14 @@ services:
     twig.extension.text:
         class: Twig_Extensions_Extension_Text
         tags:
-            - { name: twig.extension }
-            
-            
-            
+            - { name: twig.extension }        
+    smpcl.classifield.admin.category:
+        class:  smpcl\ClassifieldBundle\Admin\CategoryAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: ~, label: category }
+        arguments:  [null, smpcl\ClassifieldBundle\Entity\Category, smpclClassifieldBundle:CategoryAdmin]
+    
+    
 stfalcon_tinymce:
     include_jquery: false
     textarea_class: "tinymce"
@@ -134,3 +138,14 @@ stfalcon_tinymce:
             theme_advanced_statusbar_location: "bottom"
             theme_advanced_resizing: true
             language: es
+            
+            
+sonata_admin:
+    security_handler: sonata.admin.security.handler.noop
+    dashboard_groups:
+        default: ~
+        
+        
+        
+        
+
