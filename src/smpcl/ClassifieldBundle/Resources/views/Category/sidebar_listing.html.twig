@@ -1,0 +1,8 @@
+        <h5>Categorías</h5>
+        
+        <ul>
+            {% for entity in entities %}
+                <li><a href="{{ path('category_show', {'id': entity.id, 'slug': entity.slug}) }}">{{ entity.title }}</a></li>
+            {% endfor %}
+            
+        </ul>

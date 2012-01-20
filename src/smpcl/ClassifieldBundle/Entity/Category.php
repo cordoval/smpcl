@@ -3,6 +3,7 @@
 namespace smpcl\ClassifieldBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use smpcl\ClassifieldBundle\Utils\Utils;
 
 /**
  * smpcl\ClassifieldBundle\Entity\Category
@@ -53,7 +54,7 @@ class Category {
     /**
      * @var array $classifields
      *
-     *  * ORM\OneToMany(targetEntity="Classifield", mappedBy="category") 
+     *  @ORM\OneToMany(targetEntity="Classifield", mappedBy="category") 
      */
     private $classifields;
 
@@ -64,6 +65,15 @@ class Category {
     public function __toString() {
         return $this->title;
     }
+
+    
+    public function getSlug() {
+       $slug = Utils::getSlug($this->getTitle());
+        
+        return $slug;
+    }
+    
+   
 
     /**
      * Get id
@@ -153,5 +163,25 @@ class Category {
     public function getSubtype()
     {
         return $this->subtype;
+    }
+
+    /**
+     * Add classifields
+     *
+     * @param smpcl\ClassifieldBundle\Entity\Classifield $classifields
+     */
+    public function addClassifield(\smpcl\ClassifieldBundle\Entity\Classifield $classifields)
+    {
+        $this->classifields[] = $classifields;
+    }
+
+    /**
+     * Get classifields
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getClassifields()
+    {
+        return $this->classifields;
     }
 }

@@ -3,6 +3,7 @@
 namespace smpcl\ClassifieldBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use smpcl\ClassifieldBundle\Utils\Utils;
 
 /**
  * smpcl\ClassifieldBundle\Entity\Category
@@ -46,14 +47,14 @@ class Category {
     /**
      * @var string $subtype
      *
-     * @ORM\Column(name="subtype", type="string", length=255)
+     * @ORM\Column(name="subtype", type="string", length=255, nullable=true)
      */
     private $subtype;
 
     /**
      * @var array $classifields
      *
-     *  * ORM\OneToMany(targetEntity="Classifield", mappedBy="category") 
+     *  @ORM\OneToMany(targetEntity="Classifield", mappedBy="category") 
      */
     private $classifields;
 
@@ -65,73 +66,12 @@ class Category {
         return $this->title;
     }
 
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
+    
+    public function getSlug() {
+       $slug = Utils::getSlug($this->getTitle());
+        
+        return $slug;
     }
-
-    /**
-     * Set title
-     *
-     * @param string $title
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-    }
-
-    /**
-     * Get title
-     *
-     * @return string 
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    /**
-     * Set description
-     *
-     * @param text $description
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-    }
-
-    /**
-     * Get description
-     *
-     * @return text 
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * Set tags
-     *
-     * @param string $tags
-     */
-    public function setTags($tags)
-    {
-        $this->tags = $tags;
-    }
-
-    /**
-     * Get tags
-     *
-     * @return string 
-     */
-    public function getTags()
-    {
-        return $this->tags;
-    }
+    
+   
 }

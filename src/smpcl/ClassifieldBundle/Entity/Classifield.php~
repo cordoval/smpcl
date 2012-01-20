@@ -1,9 +1,11 @@
 <?php
 
 namespace smpcl\ClassifieldBundle\Entity;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * smpcl\ClassifieldBundle\Entity\Classifield
@@ -14,9 +16,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Classifield {
     const CURRENCY_DOLAR = 'dolar';
     const CURRENCY_PESOS_AR = 'pesos_AR';
+    const CURRENCY_EURO = 'euro';
 
     const STATUS_DISABLED = 'disabled'; // deleted entities
     const STATUS_PENDING = 'pending'; // pending classifields
+    const STATUS_EDITED = 'edited'; // pending classifields
     const STATUS_ENABLED = 'enabled'; // public classifields
 
 
@@ -48,7 +52,7 @@ class Classifield {
      /**
      * @var boolean $is_billable
      *
-     * @ORM\Column(name="is_billable", type="boolean")
+     * @ORM\Column(name="is_billable", type="boolean", nullable=true)
      */
     private $is_billable;
     
@@ -61,14 +65,14 @@ class Classifield {
     private $currency;
 
     /**
-     * @var string $price
+     * @var float $price
      *
-     * @ORM\Column(name="price", type="integer")
+     * @ORM\Column(name="price", type="float")
      */
     private $price;
 
     /**
-     * @var integer $status
+     * @var string $status
      *  @ORM\Column(type="string")
      */
     private $status;
@@ -76,14 +80,18 @@ class Classifield {
     /**
      * @var datetime $created_at
      *
-     * @ORM\Column(name="created_at", type="datetime")
+     * @ORM\Column(name="created_at", type="datetime", nullable=true)
+     * 
+     * @Gedmo\Timestampable(on="create")
      */
     private $created_at;
 
     /**
      * @var datetime $updated_at
      *
-     * @ORM\Column(name="updated_at", type="datetime")
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     * 
+     *  @Gedmo\Timestampable(on="update")
      */
     private $updated_at;
 
@@ -127,17 +135,80 @@ class Classifield {
         
         $this->status = self::STATUS_PENDING;
         
-        $this->is_billable = FALSE;
+        $this->is_billable = TRUE;
+       
         $this->currency = self::CURRENCY_PESOS_AR;
         $this->price = 0;
+        
+        $this->published_at = NULL;
+        
+        
+        
     }
 
    
+    public static function getCurrencyOptions() {
+        $currency_options = array(
+              self::CURRENCY_PESOS_AR => 'Pesos Argentinos',
+              self::CURRENCY_DOLAR => 'Dolar',
+              self::CURRENCY_EURO => 'Euro',
+          );
+        
+        return $currency_options;
+    }
+    
+    public static function getCurrencySymbols($value = NULL) {
+         $currency_symbols = array(
+              self::CURRENCY_PESOS_AR => '$',
+              self::CURRENCY_DOLAR => 'U$D',
+              self::CURRENCY_EURO => '€',
+          );
+         
+         if ($value) {
+             if (isset($currency_symbols[$value])) {
+                 return $currency_symbols[$value];
+             } else {
+                 return self::CURRENCY_PESOS_AR;
+             }
+         }
+         
+         return $currency_symbols;
+    }
+    
+    
+    public function getFormattedPrice() {
+        $output_text = 'No Aplica';
+
+        if ($this->getIsBillable()) {
+            $currency_symbol = $this->getCurrencySymbols($this->getCurrency());
+            $price = $this->getPrice();
+
+            if (!empty($price)) {
+                $price = number_format($price, 2);
+                $output_text = "{$currency_symbol} {$price}";
+            }
+        }
+
+        return $output_text;
+    }
 
     public function __toString() {
         return $this->title;
     }
    
+    /**
+     * return if some user can edit this entity
+     * @param smpcl\UserBundle\Entity\User $user 
+     */
+    public function canEdit($user) {
+        $owner = $this->getUser();
+     
+        if ($owner->equals($user)) {
+            return TRUE;
+        }
+        
+        return FALSE;
+    }
     /**
      * END CUSTOM METHODS
      */

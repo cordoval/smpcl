@@ -1,3 +1,7 @@
 smpclClassifieldBundle_classifield:
     resource: "@smpclClassifieldBundle/Resources/config/routing/classifield.yml"
     prefix:   /avisos/
+    
+category_show:
+    pattern:  /cat-{id}/{slug}/
+    defaults: { _controller: "smpclClassifieldBundle:Category:show" }

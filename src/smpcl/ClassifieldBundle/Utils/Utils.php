@@ -1,6 +1,6 @@
 <?php
 
-namespace \Utils;
+namespace smpcl\ClassifieldBundle\Utils;
 
 class Utils {
 
