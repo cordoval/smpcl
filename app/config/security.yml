@@ -24,7 +24,7 @@ security:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/, role: ROLE_USER } #ACA VA ROLE ADMIN PERO JUST FOR TESTING
+        - { path: ^/admin/, role: ROLE_ADMIN } 
         - { path: ^/avisos/, role: ROLE_USER }
 
     role_hierarchy:

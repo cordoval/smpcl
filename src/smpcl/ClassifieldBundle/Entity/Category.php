@@ -46,7 +46,7 @@ class Category {
     /**
      * @var string $subtype
      *
-     * @ORM\Column(name="subtype", type="string", length=255)
+     * @ORM\Column(name="subtype", type="string", length=255, nullable=true)
      */
     private $subtype;
 
