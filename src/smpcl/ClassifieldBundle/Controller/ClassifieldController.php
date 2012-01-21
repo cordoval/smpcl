@@ -36,7 +36,8 @@ class ClassifieldController extends Controller {
     public function showAction($id) {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entity = $em->getRepository('smpclClassifieldBundle:Classifield')->find($id);
+//        $entity = $em->getRepository('smpclClassifieldBundle:Classifield')->find($id);
+        $entity = $em->find('smpclClassifieldBundle:Classifield', $id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Classifield entity.');
@@ -108,7 +109,7 @@ class ClassifieldController extends Controller {
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Classifield entity.');
         }
-
+        
         $unvalid = $this->validateCanEdit($entity);
         if ($unvalid) {
             return $unvalid;

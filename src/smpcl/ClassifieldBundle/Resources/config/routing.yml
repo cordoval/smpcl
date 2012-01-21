@@ -3,5 +3,5 @@ smpclClassifieldBundle_classifield:
     prefix:   /avisos/
     
 category_show:
-    pattern:  /cat-{id}/{slug}/
+    pattern:  /cat/{slug}/
     defaults: { _controller: "smpclClassifieldBundle:Category:show" }

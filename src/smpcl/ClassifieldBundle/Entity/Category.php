@@ -57,12 +57,12 @@ class Category {
     /**
      * @var array $classifields
      *
-     *  @ORM\OneToMany(targetEntity="Classifield", mappedBy="category") 
+     *  @ORM\OneToMany(targetEntity="Classifield", mappedBy="category", cascade={"persist", "remove"}) 
      */
     private $classifields;
     
     /**
-     * @Gedmo\Slug(fields={"title", "code"})
+     * @Gedmo\Slug(fields={"title"})
      * @ORM\Column(length=128, unique=true)
      */
     private $slug;

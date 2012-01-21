@@ -22,13 +22,13 @@ class ClassifieldType extends AbstractType
         $builder
             
             
-            ->add('title', NULL, array('label' => 'Título'))
+            ->add('title', NULL, array('label' => 'Título *'))
+            ->add('description', NULL, array('label' => 'Descripción *', 'attr' => array('class'=>'tinymce', 'tinymce'=>'{"theme":"simple"}', 'rows' => 10)))
             ->add('category', NULL, array('label' => 'Categoría'))
-            ->add('description', NULL, array('label' => 'Descripción', 'attr' => array('class'=>'tinymce', 'tinymce'=>'{"theme":"simple"}', 'rows' => 10)))
             ->add('picture', NULL, array('label' => 'Foto'))
             ->add('is_billable', NULL, array('label' => '¿Tiene un Precio?'))
             ->add('currency', 'choice', array('label' => 'Tipo de Moneda', 'choices' => $this->currency_choices))
-            ->add('price', 'number', array('label' => 'Precio'))
+            ->add('price', NULL, array('label' => 'Precio'))
 //            ->add('status')
 //            ->add('created_at')
 //            ->add('updated_at')

@@ -65,9 +65,10 @@ class Classifield {
     private $currency;
 
     /**
-     * @var float $price
+     * 
+     * @ORM\Column(type="decimal", scale=2)
      *
-     * @ORM\Column(name="price", type="float")
+     * @Assert\Min(0)
      */
     private $price;
 

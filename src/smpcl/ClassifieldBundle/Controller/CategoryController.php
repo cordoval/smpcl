@@ -17,22 +17,18 @@ class CategoryController extends Controller {
                 ));
     }
 
-    public function showAction($id, $slug) {
+    public function showAction($slug) {
+        
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entity = $em->getRepository('smpclClassifieldBundle:Category')->find($id);
+        $entity = $em->getRepository('smpclClassifieldBundle:Category')->findOneBySlug($slug);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Category entity.');
         }
 
-        if ($entity->getSlug() != $slug) {
-            // validamos por si alguna vez cambiamos de titulo a la categoria, entonces los buscadores pueden renovar el index de la pagina
-            return $this->redirect($this->generateUrl('category_show', array('id' => $entity->getId(), 'slug' => $entity->getSlug())));
-        }
-
         $entities = $entity->getClassifields();
-        $this->setFlash('warning', 'TODO: Estaria bueno ponerle un sluggable a la entidad asi queda una URL mas amistosa, con el stof doctrine extension que ya tenemos instalado');
+        
         return $this->render('smpclClassifieldBundle:Category:show.html.twig', array(
                     'entity' => $entity,
                     'entities' => $entities,
