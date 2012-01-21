@@ -94,6 +94,7 @@ stof_doctrine_extensions:
         default:
 #            tree: false
             timestampable: true
+            sluggable: true
             
             
 services:
