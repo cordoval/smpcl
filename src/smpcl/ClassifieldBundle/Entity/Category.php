@@ -2,8 +2,11 @@
 
 namespace smpcl\ClassifieldBundle\Entity;
 
+
 use Doctrine\ORM\Mapping as ORM;
-use smpcl\ClassifieldBundle\Utils\Utils;
+use Gedmo\Mapping\Annotation as Gedmo;
+
+//use smpcl\ClassifieldBundle\Utils\Utils;
 
 /**
  * smpcl\ClassifieldBundle\Entity\Category
@@ -57,6 +60,12 @@ class Category {
      *  @ORM\OneToMany(targetEntity="Classifield", mappedBy="category") 
      */
     private $classifields;
+    
+    /**
+     * @Gedmo\Slug(fields={"title", "code"})
+     * @ORM\Column(length=128, unique=true)
+     */
+    private $slug;
 
     public function __construct() {
         $this->classifields = new \Doctrine\Common\Collections\ArrayCollection();
@@ -67,13 +76,12 @@ class Category {
     }
 
     
-    public function getSlug() {
-       $slug = Utils::getSlug($this->getTitle());
-        
-        return $slug;
-    }
+//    public function getSlug() {
+//       $slug = Utils::getSlug($this->getTitle());
+//        
+//        return $slug;
+//    }
     
-   
 
     /**
      * Get id
@@ -163,6 +171,26 @@ class Category {
     public function getSubtype()
     {
         return $this->subtype;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 
     /**
