@@ -1,4 +1,4 @@
-Simple Classifield or Catalog System - Sandbox for Symfony2
+Simple Classified or Catalog System - Sandbox for Symfony2
 ========================
 
 This sandbox is just in development stage.
