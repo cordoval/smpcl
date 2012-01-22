@@ -2512,3 +2512,8 @@ END BOOTSTRAP
 .list-icon.media-grid {
     width: 100px;
 }
+
+.nav .current {
+    font-weight: bolder;
+    text-decoration: underline;
+}
