@@ -3,16 +3,14 @@
 {% block content%}
 {% include theme_flashes_html %}    
 
-<div class="label warning">
-Falta mostrar los avisos aqui ...
-</div>
+<h1>Avisos en {{ entity.title }}</h1>
 {% for classifield in entities %}
 <blockquote>
     <div>
-        <h2>Titulo: {{ classifield.title }}</h2>
+        <h2>{{ classifield.title }} <small>{{ classifield.FormattedPrice }}</small></h2>
     </div>
     <div>
-        <h3>Descripcion: </h3>{{ classifield.description }}
+        {{ classifield.description | striptags | truncate(250) }}
     </div>
 <small><span class="label notice">Aqui debemos incluir otra vista como un classifield_listing_partial o algo asi para renderizar el clasificado asi no mezclamos frutas con papas</span></small>
 </blockquote>
