@@ -101,3 +101,11 @@
 [SonataDoctrineORMAdminBundle]
     git=http://github.com/sonata-project/SonataDoctrineORMAdminBundle.git
     target=/bundles/Sonata/DoctrineORMAdminBundle
+
+## FIXTURES ##
+[doctrine-fixtures]
+    git=http://github.com/doctrine/data-fixtures.git
+
+[DoctrineFixturesBundle]
+    git=http://github.com/symfony/DoctrineFixturesBundle.git
+    target=/bundles/Symfony/Bundle/DoctrineFixturesBundle
