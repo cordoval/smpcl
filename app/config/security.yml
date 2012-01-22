@@ -3,9 +3,11 @@ security:
     providers:
         fos_userbundle:
             id: fos_user.user_manager
-           
     encoders:
-        "FOS\UserBundle\Model\UserInterface": sha512
+        FOS\UserBundle\Model\UserInterface:
+            algorithm: sha512
+            encode-as-base64: true
+            iterations: 10
 
     firewalls:
         main:
