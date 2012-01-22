@@ -105,8 +105,13 @@ services:
     smpcl.classifield.admin.category:
         class:  smpcl\ClassifieldBundle\Admin\CategoryAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: ~, label: category }
+            - { name: sonata.admin, manager_type: orm, group: ~, label: Categorías }
         arguments:  [null, smpcl\ClassifieldBundle\Entity\Category, smpclClassifieldBundle:CategoryAdmin]
+    smpcl.classifield.admin.classifield:
+        class:  smpcl\ClassifieldBundle\Admin\ClassifieldAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: ~, label: Clasificados }
+        arguments:  [null, smpcl\ClassifieldBundle\Entity\Classifield, smpclClassifieldBundle:ClassifieldAdmin]
     
     
 stfalcon_tinymce:
