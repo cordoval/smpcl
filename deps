@@ -101,7 +101,3 @@
 [SonataDoctrineORMAdminBundle]
     git=http://github.com/sonata-project/SonataDoctrineORMAdminBundle.git
     target=/bundles/Sonata/DoctrineORMAdminBundle
-# optional bundle
-[EntityAudit]
-    git=git://github.com/simplethings/EntityAudit.git
-    target=/bundles/SimpleThings/EntityAudit
