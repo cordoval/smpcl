@@ -16,13 +16,14 @@ class ClassifieldController extends Controller {
      * Lists all Classifield entities.
      */
     public function indexAction() {
-        $em = $this->getDoctrine()->getEntityManager();
-
         $user = $this->get('security.context')->getToken()->getUser();
+        
+        if (!$user) {
+            throw $this->createNotFoundException('You must be logged in to perform this action.');
+        }
 
-//        $entities = $em->getRepository('smpclClassifieldBundle:Classifield')->findAll();
-        $entities = $em->getRepository('smpclClassifieldBundle:Classifield')
-                ->findBy(array('user' => $user->getId()), array('created_at' => 'DESC'));
+        $em = $this->get('doctrine')->getEntityManager();
+        $entities = $em->getRepository('smpclClassifieldBundle:Classifield')->getClassifieldsByUser($user);
 
         return $this->render('smpclClassifieldBundle:Classifield:index.html.twig', array(
                     'entities' => $entities
@@ -109,7 +110,7 @@ class ClassifieldController extends Controller {
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Classifield entity.');
         }
-        
+
         $unvalid = $this->validateCanEdit($entity);
         if ($unvalid) {
             return $unvalid;
@@ -151,15 +152,15 @@ class ClassifieldController extends Controller {
         $editForm->bindRequest($request);
 
         if ($editForm->isValid()) {
-            
+
             if ($entity->getPublishedAt()) {
                 $entity->setStatus(Classifield::STATUS_EDITED);
             }
-            
+
             $em->persist($entity);
             $em->flush();
             $this->setFlash('success', 'Los cambios se han aplicado con éxito.');
-            
+
             return $this->redirect($this->generateUrl('aviso_show', array('id' => $id)));
         }
 
@@ -215,7 +216,7 @@ class ClassifieldController extends Controller {
      */
     private function validateCanEdit($entity) {
         $user = $this->get('security.context')->getToken()->getUser();
-       //@TODO: CHECK IF THE USER IS AN ADMIN TOO
+        //@TODO: CHECK IF THE USER IS AN ADMIN TOO
         if (!$entity->canEdit($user)) {
             return $this->redirect($this->generateUrl('aviso'));
         }
@@ -223,9 +224,8 @@ class ClassifieldController extends Controller {
         return FALSE;
     }
 
-    
-     protected function setFlash($action, $value)
-    {
+    protected function setFlash($action, $value) {
         $this->container->get('session')->setFlash($action, $value);
     }
+
 }

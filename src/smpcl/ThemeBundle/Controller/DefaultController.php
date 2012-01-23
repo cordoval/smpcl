@@ -3,7 +3,6 @@
 namespace smpcl\ThemeBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class DefaultController extends Controller {
 
@@ -19,7 +18,7 @@ class DefaultController extends Controller {
         $template = sprintf('smpclThemeBundle:Static:%s.html.twig', $name);
 
         if (!$this->get('templating')->exists($template)) {
-            throw new NotFoundHttpException("The specified page could not be found.");
+            throw $this->createNotFoundException('The specified page could not be found.');
         }
         return $this->render($template);
     }
