@@ -2,11 +2,14 @@ imports:
     - { resource: parameters.ini }
     - { resource: security.yml }
 
-#Parametros de la aplicacion
+# Parametros de la aplicacion - Definicion de Variables
+#
 # Dentro del controlador se obtiene con $this->container->getParameter()
+#
 parameters:
-  nombre: "Simple Classifieds"
-
+  project_name: "SMPCL"
+  theme_layout: "smpclThemeBundle:Layouts:layout.html.twig"
+  theme_flashes: "smpclThemeBundle:Layouts:flashes_messages.html.twig"
 
 framework:
     #esi:             ~
@@ -27,9 +30,9 @@ twig:
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
     globals:
-        theme_layout_html: "smpclThemeBundle:Layouts:layout.html.twig"
-        theme_flashes_html: "smpclThemeBundle:Layouts:flashes_messages.html.twig"
-        theme_project_name: SMPCL
+        theme_layout_html: %theme_layout%
+        theme_flashes_html: %theme_flashes%
+        theme_project_name: %project_name%
 
 # Assetic Configuration
 assetic:
