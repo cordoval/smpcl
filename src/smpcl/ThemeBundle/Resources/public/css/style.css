@@ -2517,3 +2517,15 @@ END BOOTSTRAP
     font-weight: bolder;
     text-decoration: underline;
 }
+
+.tdFormattedPrice {
+    width: 100px;
+    text-align: center;
+    
+}
+
+.FormattedPrice {
+    font-size: 15px;
+    font-weight: bold;
+    margin: 20px 2px;
+}

@@ -3,17 +3,23 @@
 {% block content%}
 {% include theme_flashes_html %}    
 
-<h1>Avisos en {{ entity.title }}</h1>
-{% for classifield in entities %}
-<blockquote>
-    <div>
-        <h2>{{ classifield.title }} <small>{{ classifield.FormattedPrice }}</small></h2>
-    </div>
-    <div>
-        {{ classifield.description | striptags | truncate(250) }}
-    </div>
-<small><span class="label notice">Aqui debemos incluir otra vista como un classifield_listing_partial o algo asi para renderizar el clasificado asi no mezclamos frutas con papas</span></small>
-</blockquote>
-{% endfor %}
 
+<h1>Avisos en {{ entity.title }}</h1>
+{% if entities is empty%}
+<h2>Publica ahora en {{ entity.title }}</h2>
+<div class="alert-message block-message warning" data-alert="alert">
+    <p><strong>Actualmente no hay avisos por aquí!</strong> Pero puede agregar uno si lo desea, haga click en el siguiente botón, es fácil y rápido!</p>
+    <div class="alert-actions">
+        <a class="btn small success" href="{{ path('aviso_new') }}">CREAR UN AVISO</a>
+    </div>
+</div>
+{% else %}
+<table class="prettyprint linenums zebra-striped">
+    <tbody>
+        {% for classifield in entities %}
+        {% include 'smpclClassifieldBundle:Classifield:table_classified_partial.html.twig' %}
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
 {% endblock %}
