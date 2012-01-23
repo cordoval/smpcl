@@ -2525,7 +2525,7 @@ END BOOTSTRAP
 }
 
 .FormattedPrice {
-    font-size: 15px;
+    font-size: 13px;
     font-weight: bold;
-    margin: 20px 2px;
+    margin: 18px 2px;
 }

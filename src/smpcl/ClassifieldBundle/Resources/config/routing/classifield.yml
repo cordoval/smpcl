@@ -2,10 +2,6 @@ aviso:
     pattern:  /
     defaults: { _controller: "smpclClassifieldBundle:Classifield:index" }
 
-aviso_show:
-    pattern:  /{id}/ver
-    defaults: { _controller: "smpclClassifieldBundle:Classifield:show" }
-
 aviso_new:
     pattern:  /nuevo
     defaults: { _controller: "smpclClassifieldBundle:Classifield:new" }

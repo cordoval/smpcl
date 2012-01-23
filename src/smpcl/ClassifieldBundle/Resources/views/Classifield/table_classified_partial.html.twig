@@ -5,14 +5,14 @@
         </a>
     </td>
     <td class="listingRowDescription">
-        <a href="{{ path('aviso_show', { 'id': classifield.id }) }}"><h3>{{ classifield.title }}</h3></a>
+        <a href="{{ path('aviso_show', { 'id': classifield.id }) }}"><h3>{{ classifield.title }} <span class="label success">Nuevo</span> </h3></a>
         <blockquote>{{ classifield.description | striptags |truncate(200) }}</blockquote>
     </td>
     <td class="tdFormattedPrice">
         <div class="FormattedPrice">
-        {{ classifield.FormattedPrice }}
+            {{ classifield.FormattedPrice }}
         </div>
-            
+
         <a href="{{ path('aviso_show', { 'id': classifield.id }) }}"  title="{{ classifield.title }}" class="btn small primary">Ver más</a>
     </td>
 </tr>
