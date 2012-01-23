@@ -2,11 +2,11 @@
 
 {% block content %}
 <div class="row">
-<div class="span13">
-{% include theme_flashes_html %}
-<h1>{{ entity.title }} <small> &middot;  {{ entity.category }}</small></h1>
-</div>
+    <div class="span13">
+        {% include theme_flashes_html %}
+        <h1>{{ entity.title }} <small> &middot;  {{ entity.category }}</small></h1>
     </div>
+</div>
 <div class="row">
     <div class="span9 classifieldDescription">
         {% autoescape false %}
@@ -21,17 +21,41 @@
         <ul>
             <li>Mod: {{ entity.updatedat|date('d/m/Y H:i') }}</li>
             <li>Publicó: {{ entity.user }}</li>
-
         </ul>
+        <div style="text-align: center; margin-bottom: 10px">
+            <a href="#" class="btn large success"><strong>Contactar Vendedor</strong></a>
+        </div>
     </div>
     <div class="span13 well">
+        <a href="{{ path('category_show', {'slug': entity.category.slug}) }}" class="btn" title="Ir a {{ entity.category }}">Volver a {{ entity.category }}</a>
+        {% if is_granted('ROLE_USER') %}
+        <a href="{{ path('aviso') }}" class="btn info">Mis Avisos</a>
+        {% endif %}
+        {% if owner %}
         <a href="{{ path('aviso_edit', { 'id': entity.id }) }}" class="btn primary">Editar</a>
-        <a href="{{ path('aviso') }}" class="btn">Mis Avisos</a>
+        <form action="{{ path('aviso_delete', { 'id': entity.id }) }}" method="post" class="showActionDelete">
+            {{ form_widget(delete_form) }}
+            <button type="submit" class="btn danger" onclick="return confirm('¿ Estás seguro que deseas borrar el aviso ?')">Borrar</button>
+        </form>
+        {% endif %}
+
+    </div>
+
+    {% if is_granted('ROLE_ADMIN') %}
+    <div class="span13 well">
+        <h4>Opciones de Administración</h4>
+        <a href="{{ path('aviso_edit', { 'id': entity.id }) }}" class="btn primary">Editar</a>
+        <a href="{{ path('aviso_edit', { 'id': entity.id }) }}" class="btn">Validar</a>
         <form action="{{ path('aviso_delete', { 'id': entity.id }) }}" method="post" class="showActionDelete">
             {{ form_widget(delete_form) }}
             <button type="submit" class="btn danger" onclick="return confirm('¿ Estás seguro que deseas borrar el aviso ?')">Borrar</button>
         </form>
     </div>
+    {% endif %}
+
 </div>
+
+
+
 
 {% endblock %}

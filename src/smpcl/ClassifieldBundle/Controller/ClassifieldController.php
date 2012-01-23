@@ -16,17 +16,15 @@ class ClassifieldController extends Controller {
      * Lists all Classifield entities.
      */
     public function indexAction() {
-        $user = $this->get('security.context')->getToken()->getUser();
-        
-        if (!$user) {
-            throw $this->createNotFoundException('You must be logged in to perform this action.');
-        }
+//        $user = $this->get('security.context')->getToken()->getUser();
+        $user = $this->getCurrentUser();
 
         $em = $this->get('doctrine')->getEntityManager();
         $entities = $em->getRepository('smpclClassifieldBundle:Classifield')->getClassifieldsByUser($user);
 
         return $this->render('smpclClassifieldBundle:Classifield:index.html.twig', array(
-                    'entities' => $entities
+                    'entities' => $entities,
+                        //'current_user' => $user,
                 ));
     }
 
@@ -45,10 +43,17 @@ class ClassifieldController extends Controller {
         }
 
         $deleteForm = $this->createDeleteForm($id);
+        $user = $this->getCurrentUser();
+        
+        if (is_object($user) && $user->getId() == $entity->getUser()->getId())
+            $owner = true;
+        else
+            $owner = false;
 
         return $this->render('smpclClassifieldBundle:Classifield:show.html.twig', array(
                     'entity' => $entity,
                     'delete_form' => $deleteForm->createView(),
+                    'owner' => $owner,
                 ));
     }
 
@@ -79,11 +84,11 @@ class ClassifieldController extends Controller {
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
 
-            $user = $this->get('security.context')->getToken()->getUser();
+            $user = $this->getCurrentUser();
 
-            if ($user) {
-                $entity->setUser($user);
-            }
+
+            $entity->setUser($user);
+
 
             $em->persist($entity);
             $em->flush();
@@ -215,7 +220,7 @@ class ClassifieldController extends Controller {
      * @return FALSE Or \Symfony\Component\HttpFoundation\RedirectResponse 
      */
     private function validateCanEdit($entity) {
-        $user = $this->get('security.context')->getToken()->getUser();
+        $user = $this->getCurrentUser();
         //@TODO: CHECK IF THE USER IS AN ADMIN TOO
         if (!$entity->canEdit($user)) {
             return $this->redirect($this->generateUrl('aviso'));
@@ -226,6 +231,18 @@ class ClassifieldController extends Controller {
 
     protected function setFlash($action, $value) {
         $this->container->get('session')->setFlash($action, $value);
+    }
+
+    /**
+     * Return user information of current user.
+     * 
+     */
+    private function getCurrentUser() {
+        $user = $this->get('security.context')->getToken()->getUser();
+        if (!$user) {
+            throw $this->createNotFoundException('You must be logged in to perform this action.');
+        }
+        return $user;
     }
 
 }
