@@ -5,7 +5,7 @@
         </a>
     </td>
     <td class="listingRowDescription">
-        <a href="{{ path('aviso_show', { 'id': classifield.id, 'slug': classifield.slug }) }}">{{ classifield.title }}&nbsp;<span class="label success">Nuevo</span> </a>
+        <a href="{{ path('aviso_show', { 'id': classifield.id, 'slug': classifield.slug }) }}"><h3>{{ classifield.title }}&nbsp;<span class="label success">Nuevo</span></h3></a>
         <blockquote>{{ classifield.description | striptags |truncate(200) }}</blockquote>
     </td>
     <td class="tdFormattedPrice">
