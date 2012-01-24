@@ -107,7 +107,7 @@ class ClassifieldController extends Controller {
             $em->flush();
             $this->setFlash('success', 'Su aviso se ha cargado con éxito.');
 
-            return $this->redirect($this->generateUrl('aviso_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('aviso_show', array('id' => $entity->getId(), 'slug' => $entity->getSlug())));
         }
 
         return $this->render('smpclClassifieldBundle:Classifield:new.html.twig', array(
@@ -179,7 +179,7 @@ class ClassifieldController extends Controller {
             $em->flush();
             $this->setFlash('success', 'Los cambios se han aplicado con éxito.');
 
-            return $this->redirect($this->generateUrl('aviso_show', array('id' => $id)));
+            return $this->redirect($this->generateUrl('aviso_show', array('id' => $id, 'slug' => $entity->getSlug())));
         }
 
         return $this->render('smpclClassifieldBundle:Classifield:edit.html.twig', array(
