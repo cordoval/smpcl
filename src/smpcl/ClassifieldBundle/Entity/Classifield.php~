@@ -65,9 +65,10 @@ class Classifield {
     private $currency;
 
     /**
-     * @var float $price
+     * 
+     * @ORM\Column(type="decimal", scale=2)
      *
-     * @ORM\Column(name="price", type="float")
+     * @Assert\Min(0)
      */
     private $price;
 
@@ -126,6 +127,12 @@ class Classifield {
      * @ORM\ManyToOne(targetEntity="\smpcl\UserBundle\Entity\User", inversedBy="classifields")
      */
     private $user;
+    
+     /**
+     * @Gedmo\Slug(fields={"title"})
+     * @ORM\Column(length=128, unique=true)
+     */
+    private $slug;
     
 
     /**
@@ -203,6 +210,10 @@ class Classifield {
     public function canEdit($user) {
         $owner = $this->getUser();
      
+        if (!($user instanceof \smpcl\UserBundle\Entity\User)) {
+            return FALSE;
+        }
+        
         if ($owner->equals($user)) {
             return TRUE;
         }

@@ -3,7 +3,7 @@ smpclClassifieldBundle_classifield:
     prefix:   /avisos/
 
 aviso_show:
-    pattern:  /{id}/ver-aviso
+    pattern:  /aviso-{id}/{slug}/
     defaults: { _controller: "smpclClassifieldBundle:Classifield:show" }
     
 category_show:

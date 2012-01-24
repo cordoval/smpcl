@@ -32,7 +32,7 @@ class ClassifieldController extends Controller {
      * Finds and displays a Classifield entity.
      *
      */
-    public function showAction($id) {
+    public function showAction($id, $slug) {
         $em = $this->getDoctrine()->getEntityManager();
 
 //        $entity = $em->getRepository('smpclClassifieldBundle:Classifield')->find($id);
@@ -40,6 +40,14 @@ class ClassifieldController extends Controller {
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Classifield entity.');
+        }
+        
+        /**
+         * We setted in that way instead retrieve the entity only by slug, to avoid google index problems
+         * for example, if someone changes the title, the slug will change too
+         */
+        if ($entity->getSlug() != $slug) {
+           return $this->redirect($this->generateUrl('aviso_show', array('id' => $id, 'slug' => $entity->getSlug())));
         }
 
         $deleteForm = $this->createDeleteForm($id);

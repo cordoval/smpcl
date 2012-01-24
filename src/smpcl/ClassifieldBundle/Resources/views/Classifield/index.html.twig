@@ -23,13 +23,13 @@
         <tr>
             <td class="list-icon media-grid">
 
-                <a href="{{ path('aviso_show', { 'id': entity.id }) }}">
+                <a href="{{ path('aviso_show', { 'id': entity.id, 'slug': entity.slug }) }}">
                     <img class="thumbnail" src="http://placehold.it/90x90" alt="{{ entity.title }}"/>
                 </a>
 
             </td>
             <td class="listingRowDescription">
-                <a href="{{ path('aviso_show', { 'id': entity.id }) }}">{{ entity.title }}</a>
+                <a href="{{ path('aviso_show', { 'id': entity.id, 'slug': entity.slug }) }}">{{ entity.title }}</a>
                 <blockquote>{{ entity.description | striptags |truncate(100) }}</blockquote>
             </td>
 
@@ -44,7 +44,7 @@
             <td>
                 <ul>
                     <li>
-                        <a href="{{ path('aviso_show', { 'id': entity.id }) }}">Ver</a>
+                        <a href="{{ path('aviso_show', { 'id': entity.id, 'slug': entity.slug }) }}">Ver</a>
                     </li>
                     <li>
                         <a href="{{ path('aviso_edit', { 'id': entity.id }) }}">Editar</a>
