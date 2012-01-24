@@ -27,7 +27,8 @@ class CategoryController extends Controller {
             throw $this->createNotFoundException('Unable to find Category entity.');
         }
 
-        $entities = $entity->getClassifields();
+//        $entities = $entity->getClassifields();
+        $entities = $em->getRepository('smpclClassifieldBundle:Category')->getClassififields($entity->getId());
         
         return $this->render('smpclClassifieldBundle:Category:show.html.twig', array(
                     'entity' => $entity,

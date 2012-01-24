@@ -43,17 +43,11 @@ class ClassifieldController extends Controller {
         }
 
         $deleteForm = $this->createDeleteForm($id);
-        $user = $this->getCurrentUser();
-        
-        if (is_object($user) && $user->getId() == $entity->getUser()->getId())
-            $owner = true;
-        else
-            $owner = false;
 
         return $this->render('smpclClassifieldBundle:Classifield:show.html.twig', array(
                     'entity' => $entity,
                     'delete_form' => $deleteForm->createView(),
-                    'owner' => $owner,
+                    
                 ));
     }
 
@@ -239,10 +233,15 @@ class ClassifieldController extends Controller {
      */
     private function getCurrentUser() {
         $user = $this->get('security.context')->getToken()->getUser();
+        
         if (!$user) {
             throw $this->createNotFoundException('You must be logged in to perform this action.');
         }
+        
         return $user;
     }
 
+    private function isAdminLoggedIn() {
+        return $this->get('security.context')->isGranted('ROLE_ADMIN');
+    }
 }

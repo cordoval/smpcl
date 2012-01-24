@@ -13,14 +13,7 @@ use Doctrine\ORM\EntityRepository;
 class ClassifieldRepository extends EntityRepository {
 
     public function getClassifieldsByUser($user) {
-        $dql = 'SELECT p FROM smpcl\ClassifieldBundle\Entity\Classifield p
-        WHERE p.user = '.$user->getId().'   
-        ORDER BY p.id DESC';
-
-        $query = $this->getEntityManager()->createQuery($dql);
-        //$query->setMaxResults($limit);
-
-        return $query->getResult();
+        return $this->findBy(array('user' => $user->getId()), array('id' => 'DESC'));
     }
 
 }

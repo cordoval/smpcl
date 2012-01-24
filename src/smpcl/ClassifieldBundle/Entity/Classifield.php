@@ -204,6 +204,10 @@ class Classifield {
     public function canEdit($user) {
         $owner = $this->getUser();
      
+        if (!($user instanceof \smpcl\UserBundle\Entity\User)) {
+            return FALSE;
+        }
+        
         if ($owner->equals($user)) {
             return TRUE;
         }

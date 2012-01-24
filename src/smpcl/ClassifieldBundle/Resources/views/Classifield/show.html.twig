@@ -1,5 +1,7 @@
 {% extends theme_layout_html %}
 
+{% set is_owner = entity.canEdit(app.user) %}
+
 {% block content %}
 <div class="row">
     <div class="span13">
@@ -31,7 +33,7 @@
         {% if is_granted('ROLE_USER') %}
         <a href="{{ path('aviso') }}" class="btn info">Mis Avisos</a>
         {% endif %}
-        {% if owner %}
+        {% if is_owner %}
         <a href="{{ path('aviso_edit', { 'id': entity.id }) }}" class="btn primary">Editar</a>
         <form action="{{ path('aviso_delete', { 'id': entity.id }) }}" method="post" class="showActionDelete">
             {{ form_widget(delete_form) }}

@@ -6,11 +6,11 @@
 
 <h1>Avisos en {{ entity.title }}</h1>
 {% if entities is empty%}
-<h2>Publica ahora en {{ entity.title }}</h2>
+<h3>Publica aquí ahora !</h3>
 <div class="alert-message block-message warning" data-alert="alert">
     <p><strong>Actualmente no hay avisos por aquí!</strong> Pero puede agregar uno si lo desea, haga click en el siguiente botón, es fácil y rápido!</p>
     <div class="alert-actions">
-        <a class="btn small success" href="{{ path('aviso_new') }}">CREAR UN AVISO</a>
+        <a class="btn small success" href="{{ path('aviso_new', {'category': entity.slug}) }}">CREAR UN AVISO</a>
     </div>
 </div>
 {% else %}

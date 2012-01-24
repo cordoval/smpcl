@@ -3,7 +3,7 @@
 namespace smpcl\ClassifieldBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
-
+use smpcl\ClassifieldBundle\Entity\Classifield;
 /**
  * CategoryRepository
  *
@@ -12,4 +12,16 @@ use Doctrine\ORM\EntityRepository;
  */
 class CategoryRepository extends EntityRepository
 {
+    
+    public function getClassififields($id) {
+       $enabled_status = Classifield::STATUS_ENABLED;
+       
+        $dql = "SELECT c FROM smpcl\ClassifieldBundle\Entity\Classifield c
+        WHERE c.category = {$id} AND c.status = '{$enabled_status}' ORDER BY c.published_at DESC";
+        
+        $query = $this->getEntityManager()->createQuery($dql);
+        
+        return $query->getResult();
+    }
+    
 }
