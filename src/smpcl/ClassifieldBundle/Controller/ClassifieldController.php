@@ -41,35 +41,28 @@ class ClassifieldController extends Controller {
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Classifield entity.');
         }
-        
+
         /**
          * We setted in that way instead retrieve the entity only by slug, to avoid google index problems
          * for example, if someone changes the title, the slug will change too
          */
         if ($entity->getSlug() != $slug) {
-           return $this->redirect($this->generateUrl('aviso_show', array('id' => $id, 'slug' => $entity->getSlug())));
+            return $this->redirect($this->generateUrl('aviso_show', array('id' => $id, 'slug' => $entity->getSlug())));
         }
 
         $deleteForm = $this->createDeleteForm($id);
-        
-//        $is_owner = $entity->canEdit($this->getCurrentUser());
 
         $is_owner = FALSE;
         $unvalidated = $this->validateCanEdit($entity);
+        
         if ($unvalidated == FALSE) {
             $is_owner = TRUE;
+            if ($entity->getStatus() != Classifield::STATUS_ENABLED) {
+                $this->setFlash('info', 'Este aviso se encuentra en estado de moderación, aguarde a un administrador para que sea aprobado.');
+            }
         }
-        
-        /** Validate if the user is owner or admin
-         * If not, then ask if the classified is enabled, if not then should't be public
-         */
-//        if (!($is_owner || $this->isAdminLoggedIn())) {
-//            if ($entity->getStatus() != Classifield::STATUS_ENABLED) {
-//                throw $this->createNotFoundException("You can't view this classified.");
-//            }
-//        }
-         
-        
+
+
         return $this->render('smpclClassifieldBundle:Classifield:show.html.twig', array(
                     'entity' => $entity,
                     'delete_form' => $deleteForm->createView(),
@@ -246,8 +239,8 @@ class ClassifieldController extends Controller {
             return FALSE;
         }
 
-          return $this->redirect($this->generateUrl('aviso'));
-       }
+        return $this->redirect($this->generateUrl('aviso'));
+    }
 
     protected function setFlash($action, $value) {
         $this->container->get('session')->setFlash($action, $value);
@@ -259,15 +252,16 @@ class ClassifieldController extends Controller {
      */
     private function getCurrentUser() {
         $user = $this->get('security.context')->getToken()->getUser();
-        
+
         if (!$user) {
             throw $this->createNotFoundException('You must be logged in to perform this action.');
         }
-        
+
         return $user;
     }
 
     private function isAdminLoggedIn() {
         return $this->get('security.context')->isGranted('ROLE_ADMIN');
     }
+
 }

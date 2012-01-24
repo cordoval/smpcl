@@ -22,9 +22,12 @@
             <li>Mod: {{ entity.updatedat|date('d/m/Y H:i') }}</li>
             <li>Publicó: {{ entity.user }}</li>
         </ul>
+        
+        {% if entity.canEdit(app.user) == false%}
         <div style="text-align: center; margin-bottom: 10px">
-            <a href="#" class="btn large success"><strong>Contactar Vendedor</strong></a>
+            <a href="#" class="btn large info"><strong>Contactar Vendedor</strong></a>
         </div>
+        {% endif %}
         
          {% if is_granted('ROLE_ADMIN') %}
         <div class="well">
