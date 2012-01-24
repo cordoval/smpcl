@@ -43,11 +43,22 @@ class ClassifieldController extends Controller {
         }
 
         $deleteForm = $this->createDeleteForm($id);
+        
+        $is_owner = $entity->canEdit($this->getCurrentUser());
 
+        /** Validate if the user is owner or admin
+         * If not, then ask if the classified is enabled, if not then should't be public
+         */
+        if (!($is_owner || $this->isAdminLoggedIn())) {
+            if ($entity->getStatus() != Classifield::STATUS_ENABLED) {
+                throw $this->createNotFoundException("You can't view this classified.");
+            }
+        }
+        
         return $this->render('smpclClassifieldBundle:Classifield:show.html.twig', array(
                     'entity' => $entity,
                     'delete_form' => $deleteForm->createView(),
-                    
+                    'is_owner' => $is_owner,
                 ));
     }
 
