@@ -57,6 +57,7 @@ class ClassifieldAdmin extends Admin {
     public function configureListFields(ListMapper $listMapper) {
         $listMapper
                 ->addIdentifier('title')
+                ->add('status')
 //            ->add('description')
 
         ;
