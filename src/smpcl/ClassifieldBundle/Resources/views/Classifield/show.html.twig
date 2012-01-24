@@ -25,6 +25,18 @@
         <div style="text-align: center; margin-bottom: 10px">
             <a href="#" class="btn large success"><strong>Contactar Vendedor</strong></a>
         </div>
+        
+         {% if is_granted('ROLE_ADMIN') %}
+        <div class="well">
+            <div class="alert-message warning">Administrar Aviso</div>
+            <ul>
+                {#Llamar al mismo controlodar del classifield admin #}
+                <li><a href="#">Habilitar</a></li>
+                <li><a href="#">Deshabilitar</a></li>
+                <li><a href="#">A Moderar</a></li>
+            </ul>
+        </div>
+        {% endif %}
     </div>
     <div class="span13 well">
         <a href="{{ path('category_show', {'slug': entity.category.slug}) }}" class="btn" title="Ir a {{ entity.category }}">Volver a {{ entity.category }}</a>
@@ -40,18 +52,6 @@
         {% endif %}
 
     </div>
-
-    {% if is_granted('ROLE_ADMIN') %}
-    <div class="span13 well">
-        <h4>Opciones de Administración</h4>
-        <a href="{{ path('aviso_edit', { 'id': entity.id }) }}" class="btn primary">Editar</a>
-        <a href="{{ path('aviso_edit', { 'id': entity.id }) }}" class="btn">Validar</a>
-        <form action="{{ path('aviso_delete', { 'id': entity.id }) }}" method="post" class="showActionDelete">
-            {{ form_widget(delete_form) }}
-            <button type="submit" class="btn danger" onclick="return confirm('¿ Estás seguro que deseas borrar el aviso ?')">Borrar</button>
-        </form>
-    </div>
-    {% endif %}
 
 </div>
 

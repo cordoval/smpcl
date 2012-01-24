@@ -52,16 +52,23 @@ class ClassifieldController extends Controller {
 
         $deleteForm = $this->createDeleteForm($id);
         
-        $is_owner = $entity->canEdit($this->getCurrentUser());
+//        $is_owner = $entity->canEdit($this->getCurrentUser());
 
+        $is_owner = FALSE;
+        $unvalidated = $this->validateCanEdit($entity);
+        if ($unvalidated == FALSE) {
+            $is_owner = TRUE;
+        }
+        
         /** Validate if the user is owner or admin
          * If not, then ask if the classified is enabled, if not then should't be public
          */
-        if (!($is_owner || $this->isAdminLoggedIn())) {
-            if ($entity->getStatus() != Classifield::STATUS_ENABLED) {
-                throw $this->createNotFoundException("You can't view this classified.");
-            }
-        }
+//        if (!($is_owner || $this->isAdminLoggedIn())) {
+//            if ($entity->getStatus() != Classifield::STATUS_ENABLED) {
+//                throw $this->createNotFoundException("You can't view this classified.");
+//            }
+//        }
+         
         
         return $this->render('smpclClassifieldBundle:Classifield:show.html.twig', array(
                     'entity' => $entity,
@@ -235,12 +242,12 @@ class ClassifieldController extends Controller {
     private function validateCanEdit($entity) {
         $user = $this->getCurrentUser();
         //@TODO: CHECK IF THE USER IS AN ADMIN TOO
-        if (!$entity->canEdit($user)) {
-            return $this->redirect($this->generateUrl('aviso'));
+        if ($entity->canEdit($user) || $this->isAdminLoggedIn()) {
+            return FALSE;
         }
 
-        return FALSE;
-    }
+          return $this->redirect($this->generateUrl('aviso'));
+       }
 
     protected function setFlash($action, $value) {
         $this->container->get('session')->setFlash($action, $value);
