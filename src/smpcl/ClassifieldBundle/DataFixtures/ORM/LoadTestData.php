@@ -28,7 +28,7 @@ class LoadUserData implements FixtureInterface {
             'Tiempo Libre',
             'Deportes',
             'Servicios',
-            'Hogar/Amoblamientos',
+            'Hogar / Amoblamientos',
             'Cursos/Educación',
             'Profesionales',
             'Varios',
