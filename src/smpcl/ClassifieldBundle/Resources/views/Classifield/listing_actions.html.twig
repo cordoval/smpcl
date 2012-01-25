@@ -1,4 +1,4 @@
-{% if entity is defined %}
+{% if entity is defined and from_category_list is defined and from_category_list == true %}
     {% set current_path = path('aviso_new', {'category': entity.slug})%}
 {% else %}
     {% set current_path = path('aviso_new') %}

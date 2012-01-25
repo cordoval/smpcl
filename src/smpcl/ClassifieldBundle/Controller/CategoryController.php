@@ -33,6 +33,7 @@ class CategoryController extends Controller {
         return $this->render('smpclClassifieldBundle:Category:show.html.twig', array(
                     'entity' => $entity,
                     'entities' => $entities,
+                    'from_category_list' => TRUE,
                 ));
     }
 
