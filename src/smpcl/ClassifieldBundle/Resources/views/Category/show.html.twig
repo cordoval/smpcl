@@ -5,6 +5,9 @@
 
 
 <h1>Avisos en {{ entity.title }}</h1>
+
+{% include 'smpclClassifieldBundle:Classifield:listing_actions.html.twig' %}
+
 {% if entities is empty%}
 <h3>Publicá ahora !</h3>
 <div class="alert-message block-message warning" data-alert="alert">

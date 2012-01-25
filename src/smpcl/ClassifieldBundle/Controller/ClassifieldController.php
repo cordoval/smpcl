@@ -54,11 +54,17 @@ class ClassifieldController extends Controller {
 
         $is_owner = FALSE;
         $unvalidated = $this->validateCanEdit($entity);
-        
+
         if ($unvalidated == FALSE) {
             $is_owner = TRUE;
-            if ($entity->getStatus() != Classifield::STATUS_ENABLED) {
+        }
+
+        if ($entity->getStatus() != Classifield::STATUS_ENABLED) {
+            if ($is_owner) {
                 $this->setFlash('info', 'Este aviso se encuentra en estado de moderación, aguarde a un administrador para que sea aprobado.');
+            } else {
+                $this->setFlash('error', 'No tienes permisos para acceder a este aviso.');
+                return $unvalidated;
             }
         }
 
@@ -76,8 +82,19 @@ class ClassifieldController extends Controller {
      */
     public function newAction() {
         $entity = new Classifield();
+         $request = $this->getRequest();
+        
+         $category_input = $request->get('category', NULL);
+         if ($category_input) {
+              $em = $this->getDoctrine()->getEntityManager();
+             $category = $em->getRepository('smpclClassifieldBundle:Category')->findOneBySlug($category_input);
+             if ($category) {
+                 $entity->setCategory($category);
+             }
+         }
         $form = $this->createForm(new ClassifieldType(), $entity);
 
+        
         return $this->render('smpclClassifieldBundle:Classifield:new.html.twig', array(
                     'entity' => $entity,
                     'form' => $form->createView()
@@ -222,8 +239,7 @@ class ClassifieldController extends Controller {
     private function createDeleteForm($id) {
         return $this->createFormBuilder(array('id' => $id))
                         ->add('id', 'hidden')
-                        ->getForm()
-        ;
+                        ->getForm();
     }
 
     /**

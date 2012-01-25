@@ -1,5 +1,12 @@
+{% if entity is defined %}
+    {% set current_path = path('aviso_new', {'category': entity.slug})%}
+{% else %}
+    {% set current_path = path('aviso_new') %}
+{% endif %}
+
 {% if entities %}
+
 <div class="well listingAvisosTopActions">
-    <a href="{{ path('aviso_new') }}" class="btn success ">Crear nuevo Aviso </a>
+    <a href="{{ current_path }}" class="btn success ">Crear nuevo Aviso </a>
 </div>
 {% endif %}

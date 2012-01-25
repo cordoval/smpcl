@@ -3,6 +3,8 @@
 {% block content %}
 <h1>Mis Avisos</h1>
 
+{% include theme_flashes_html %}
+
 {% include 'smpclClassifieldBundle:Classifield:listing_actions.html.twig' %}
 
 {% if entities %}
